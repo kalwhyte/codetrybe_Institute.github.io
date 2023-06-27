@@ -1,22 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registration</title>
-  </head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    </head>
   <body>
-    <div class="container">
-      <div class="form-container">
-          <h2>Login</h2>
-          <form action="login.php" method="post">
-              <input type="text" name="username" placeholder="Username" required>
-              <input type="password" name="password" placeholder="Password" required>
-              <input type="submit" value="Login">
-              <p class="switch-link">New user? <a href="register.html">Signup here</a></p>
-          </form>
+<form action="" method="post" class="signup">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div>
+      {% for error in form.non_field_errors %}
+      {{error}}
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if form.errors %}
+    {% for field in form %}
+    {% for error in field.errors %}
+    {{error}}
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+       
+          <div class="field">
+            {{form.username.label}}
+            {{form.username}}
+          </div>
+          <div class="field">
+            {{form.email.label}}
+            {{form.email}}
+          </div>
+           <div class="field">
+            {{form.address.label}}
+            {{form.address}}
+          </div>
+           <div class="field">
+            {{form.phone_number.label}}
+            {{form.phone_number}}
+          </div>
+          <div class="field">
+            {{form.password1.label}}
+            {{form.password1}}
+          </div>
+          <div class="field">
+            {{form.password2.label}}
+            {{form.password2}}
+          </div>
+          <div class="field btn">
+            <div class="btn-layer"></div>
+            <input type="submit" value="Signup">
+          </div>
+        </form>
+        <button type="submit">
+          Register
         </button>
-        <br />
-      </form>
+    </form>
+  
+
   </body>
 </html>
