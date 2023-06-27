@@ -211,6 +211,6 @@
         font-weight: 500;
         cursor: pointer;
     }
-    span.erro{
-        color: red;
-    }
+.warning {
+    color: #fa4299;
+}
