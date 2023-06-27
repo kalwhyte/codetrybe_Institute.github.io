@@ -27,53 +27,82 @@
         <div class="form-inner">
             <form action="" class="login" method="post">
               {% csrf_token %}
-                {% if form.non_field_errors %}
-    <div>
+              {% if form.non_field_errors %}
+                <div>
                   {% for error in form.non_field_errors %}
-                  {{error}}
+                      {{error}}
                   {% endfor %}
                 </div>
-                {% endif %}
-                {% if form.errors %}
-                {% for field in form %}
-                {% for error in field.errors %}
-               <span class="erro">
-                 {{error}}
-               </span>
-                {% endfor %}
-                {% endfor %}
-                {% endif %}
+              {% endif %}
+              {% if form.errors %}
+                  {% for field in form %}
+                      {% for error in field.errors %}
+                          <span class="erro">
+                              {{error}}
+                          </span>
+                      {% endfor %}
+                  {% endfor %}
+              {% endif %}
+              <div class="field">
+                  {{form.username}}
+            </div>
+            <div class="field">
+                {{form.password}}
+            </div>
+            <div class="pass-link">
+                <a href="#">Forgot password?</a>
+            </div>
+            <div class="field btn">
+                <div class="btn-layer"></div>
+                <input type="submit" value="Login">
+            </div>
+            <div class="signup-link">
+                Not a member? <a href="{%url 'panel-registerpage'%}">Signup now</a>
+            </div>
+        </form>
+        <form action="#" class="signup">
+            <div class="field">
+                <label for="user-type">User Type</label>
+                <select name="user-type" id="user-type">
+                    <option value="admin">Admin</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+          </div>
+          {% if user_type == 'student' %}
+          <div class="field">
+            {{form.first_name}}
+          </div>
+          <div class="field">
+            {{form.last_name}}
+          </div>
+          <div class="field">
+            {{form.email}}
+          </div>
+          <div class="field">
+            {{form.phone_number}}
+          </div>
+          <div class="field">
+            {{form.class_name}}
+          <div class="field">
+            {{form.address}}
+          </div>
+          {% endif %}
+          {% if user_type in user_types %}
               <div class="field">
                 {{form.username}}
-            </div>
-          <div class="field">
-            {{form.password}}
-          </div>
-          <div class="pass-link">
-            <a href="#">Forgot password?</a>
-          </div>
-          <div class="field btn">
-            <div class="btn-layer"></div>
-            <input type="submit" value="Login">
-          </div>
-          <div class="signup-link">
-            Not a member? <a href="{%url 'panel-registerpage'%}">Signup now</a>
-          </div>
-        </form>
-        <!-- <form action="#" class="signup">
-          <div class="field">
-            <input type="text" placeholder="Email Address" required>
-          </div>
-          <div class="field">
-            <input type="password" placeholder="Password" required>
-          </div>
-          <div class="field">
-            <input type="password" placeholder="Confirm password" required>
-          </div>
-          <div class="field btn">
-            <div class="btn-layer"></div>
-            <input type="submit" value="Signup">
-          </div> -->
+              </div>
+              <div class="field">
+                  {{form.password1}}
+              </div>
+              <div class="field">
+                  {{form.password2}}
+              </div>
+              <div class="field btn">
+                  <div class="btn-layer"></div>
+                  <input type="submit" value="Signup">
+              </div>
+          {% endif %}
         </form>
       </div>
     </div>
