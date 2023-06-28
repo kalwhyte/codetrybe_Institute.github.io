@@ -18,7 +18,18 @@ def login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            pass
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            try:
+                user = User.objects.get(username=username)
+                if user.check_password(password):
+                    # Redirect to a success page.
+                    return redirect('panel-adminpage')
+                else:
+                    # Return an 'invalid login' error message.
+                    form.add_error('password', 'Invalid username or password')
+            except User.DoesNotExist:
+                form.add_error('username', 'Invalid username or password')
     else:
         form = AuthenticationForm()
 
