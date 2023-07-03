@@ -5,12 +5,12 @@ from django.contrib.auth.admin import User
 from .models import Admin, Teacher, Student, Subject
 from .forms import AdminRegistrationForm, TeacherRegistrationForm, StudentRegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     return render(request, template_name="panel/index.html")
 
-
+@login_required
 def welcome(request):
     return render(request, template_name="panel/index.html")
 
@@ -26,8 +26,9 @@ def login_view(request):
                 if user.check_password(password):
                     authenticated_user = authenticate(username=username, password=password)
                     login(request, authenticated_user)
-                    # Redirect to a success page.
-                    return redirect('panel-adminpage')
+                      # Redirect to a success page.
+                    admin_instance = Admin.objects.get(user=user)
+                    return render(request,'panel/admin.html', {'admin_instance':admin_instance})
                 else:
                     # Return an 'invalid login' error message.
                     form.add_error('password', 'Invalid username or password')
@@ -39,9 +40,12 @@ def login_view(request):
     return render(request,'panel/login.html',{'form':form})
 
 
+@login_required
 def admin(request):
     return render(request, 'panel/admin.html')
 
+
+@login_required
 def StdReg(request):
     if request.method == 'POST':
         form = StudentRegistrationForm(request.POST)
@@ -83,6 +87,7 @@ def StdReg(request):
     return render(request, "panel/StdReg.html", {'form':form})
     
 
+@login_required
 def admReg(request):
     if request.method == 'POST':
         form = AdminRegistrationForm(request.POST)
@@ -97,6 +102,7 @@ def admReg(request):
     return render(request, "panel/admReg.html", {'form':form})
 
 
+@login_required
 def tchReg(request):
     if request.method == 'POST':
         form = TeacherRegistrationForm(request.POST)
@@ -106,3 +112,8 @@ def tchReg(request):
             return redirect('panel-tchRegpage')  
     form = TeacherRegistrationForm()
     return render(request, template_name="panel/tchReg.html")
+
+
+def Logout_view(request):
+    logout(request)
+    return render(request, 'panel/index.html')

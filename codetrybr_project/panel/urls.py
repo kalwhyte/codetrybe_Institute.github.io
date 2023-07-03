@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('',views.home, name='panel-home'),
@@ -9,4 +10,5 @@ urlpatterns = [
     path('StdReg/',views.StdReg, name='panel-StdRegpage'),
     path('admReg/',views.admReg, name='panel-admRegpage'),
     path('tchReg/',views.tchReg, name='panel-tchRegpage'),
+    path('logout/',views.Logout_view, name='panel-logout')
 ]
