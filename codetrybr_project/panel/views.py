@@ -1,6 +1,6 @@
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render,redirect
-from django.contrib.auth import login,authenticate
+from django.http import HttpResponse
 from django.contrib.auth.admin import User
 from .models import Admin, Teacher, Student, Subject
 from .forms import AdminRegistrationForm, TeacherRegistrationForm, StudentRegistrationForm
@@ -15,7 +15,7 @@ def welcome(request):
     return render(request, template_name="panel/index.html")
 
 
-def login(request):
+def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -24,6 +24,8 @@ def login(request):
             try:
                 user = User.objects.get(username=username)
                 if user.check_password(password):
+                    authenticated_user = authenticate(username=username, password=password)
+                    login(request, authenticated_user)
                     # Redirect to a success page.
                     return redirect('panel-adminpage')
                 else:
