@@ -1,12 +1,10 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>CodeTrybe Admin Panel</title>
+    <link rel="stylesheet" href="{% static 'panel/admin.css' %}" type='text/css' />
 </head>
 <body>
-<h1>welcome {{user.username}} </h1>
-<p>we'd reach you at {{user.email}} </p>
-
+<h1>CodeTrybe Admin Panel</h1>
 </body>
 </html>
