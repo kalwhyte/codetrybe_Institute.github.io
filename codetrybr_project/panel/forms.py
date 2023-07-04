@@ -30,21 +30,11 @@ class TeacherRegistrationForm(UserCreationForm):
     email = forms.EmailField()
     address = forms.CharField(max_length=50)
     
-OPTIONAL_SUBJECT = [
-    ('Igbo', 'Igbo'),
-    ('Yoruba', 'Yoruba'),
-    ('Hausa', 'Hausa'),
-    ('French', 'French'),
-    ('Arabic', 'Arabic'),
-]
+
 class StudentRegistrationForm(UserCreationForm):
     """
     Student registration form fields
     """
-    #username = forms.CharField(max_length=50)
-    #password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
-    #password2 = forms.CharField(label="Password Confirmation", widget=forms.PasswordInput)
-
     dob = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     gender = forms.ChoiceField(choices=[('male', 'Male'), ('female', 'Female')])
     class Meta:
@@ -60,7 +50,6 @@ class StudentRegistrationForm(UserCreationForm):
             'std_class',
             'email',
             'gender',
-            'optional_subject'
         ]
     
     def save(self, commit=True):
@@ -74,7 +63,6 @@ class StudentRegistrationForm(UserCreationForm):
         dob = self.cleaned_data['dob']
         email = self.cleaned_data['email']
         gender = self.cleaned_data['gender']
-        optional_subject = self.cleaned_data['optional_subject']
 
         # Assigns the cleaned data to the user object
         if commit:
@@ -90,19 +78,18 @@ class StudentRegistrationForm(UserCreationForm):
                 std_class=std_class,
                 email=email,
                 gender=gender,
-                optional_subject=optional_subject
             )
 
             # If the student is in JSS 1, 2 or 3, add all subjects to the student
-            if std_class is not None:
-                default_subjects = Subject.objects.filter(name__lte=8)
-                student.subjects.add(*default_subjects)
+            # if std_class is not None:
+            #     default_subjects = Subject.objects.filter(name__lte=8)
+            #     student.subjects.add(*default_subjects)
         return user
         
-    def clean(self):
-        cleaned_data = super().clean()
-        std_class = cleaned_data.get("std_class")
-        if std_class and 'subjects' in self.cleaned_data:
-            del self.cleaned_data['subjects']
-        return cleaned_data
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     std_class = cleaned_data.get("std_class")
+    #     if std_class and 'subjects' in self.cleaned_data:
+    #         del self.cleaned_data['subjects']
+    #     return cleaned_data
 

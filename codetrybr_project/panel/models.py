@@ -84,7 +84,7 @@ class Student(models.Model):
     std_class = models.ForeignKey(StdClass, on_delete=models.CASCADE, default=None)
     email = models.EmailField(max_length=50, default="codetrybe@codetrybe.com")
     gender = models.CharField(max_length=10, default='NULL')
-    optional_subject = models.ManyToManyField(Subject, related_name="students_optional", blank=True, limit_choices_to={'name__in': OPTIONAL_SUBJECT})
+   
 
     USERNAME_FIELD = 'user'
 
@@ -104,13 +104,13 @@ class SubjectScore(models.Model):
         return f"{self.student.user.username} {self.subject.name}"
     
 # Create your models here.
-class OptionalSubjectScore(models.Model):
-    """
-    a model for Subject Score
-    """
-    student = models.ForeignKey(Student,on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
-    score = models.IntegerField()
+# class OptionalSubjectScore(models.Model):
+#     """
+#     a model for Subject Score
+#     """
+#     student = models.ForeignKey(Student,on_delete=models.CASCADE)
+#     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
+#     score = models.IntegerField()
 
-    def __str__(self):
-        return f"{self.student.user.username} {self.subject.name}"
+#     def __str__(self):
+#         return f"{self.student.user.username} {self.subject.name}"
