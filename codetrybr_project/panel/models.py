@@ -66,13 +66,13 @@ class StdClass(models.Model):
     def __str__(self):
         return self.name
     
-OPTIONAL_SUBJECT = [
-    ('Igbo', 'Igbo'),
-    ('Yoruba', 'Yoruba'),
-    ('Hausa', 'Hausa'),
-    ('French', 'French'),
-    ('Arabic', 'Arabic'),
-]
+# OPTIONAL_SUBJECT = [
+#     ('Igbo', 'Igbo'),
+#     ('Yoruba', 'Yoruba'),
+#     ('Hausa', 'Hausa'),
+#     ('French', 'French'),
+#     ('Arabic', 'Arabic'),
+# ]
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -84,9 +84,8 @@ class Student(models.Model):
     std_class = models.ForeignKey(StdClass, on_delete=models.CASCADE, default=None)
     email = models.EmailField(max_length=50, default="codetrybe@codetrybe.com")
     gender = models.CharField(max_length=10, default='NULL')
-   
+    # USERNAME_FIELD = 'user'
 
-    USERNAME_FIELD = 'user'
 
     def __str__(self):
         return self.user.username
