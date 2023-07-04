@@ -27,8 +27,8 @@ def login_view(request):
                     authenticated_user = authenticate(username=username, password=password)
                     login(request, authenticated_user)
                       # Redirect to a success page.
-                    admin_instance = Admin.objects.get(user=user)
-                    return render(request,'panel/admin.html', {'admin_instance':admin_instance})
+                   
+                    return render(request,'panel/admin.html')
                 else:
                     # Return an 'invalid login' error message.
                     form.add_error('password', 'Invalid username or password')
