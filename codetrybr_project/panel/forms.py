@@ -1,16 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Student, Teacher, Admin, Subject
+from .models import Student, Teacher, Admin, Subject, StdClass
 from django.db import models
 
 
 
 
-GENDER = [
-    ('male', 'Male'),
-    ('female', 'Female'),
-    ('other', 'Other'),
-]
+
 class AdminRegistrationForm(UserCreationForm):
     """
     adding extra field to the User created form
@@ -30,16 +26,29 @@ class TeacherRegistrationForm(UserCreationForm):
     email = forms.EmailField()
     address = forms.CharField(max_length=50)
     
-
+GENDER = [
+    ('male', 'Male'),
+    ('female', 'Female'),
+    ('other', 'Other'),
+]
 class StudentRegistrationForm(UserCreationForm):
     """
     Student registration form fields
     """
     dob = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-    gender = forms.ChoiceField(choices=[('male', 'Male'), ('female', 'Female')])
+    gender = forms.ChoiceField(choices=GENDER)
+    std_class = forms.ModelChoiceField(queryset=StdClass.objects.all())
     class Meta:
         model = Student
-        fields = UserCreationForm.Meta.fields + ('phone_number', 'address', 'subjects', 'dob', 'std_class', 'email', 'gender')
+        fields = UserCreationForm.Meta.fields + (
+            'phone_number', 
+            'address',
+            'subjects',
+            'dob',
+            'std_class',
+            'email',
+            'gender'
+        ) # type: ignore
     
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -82,3 +91,18 @@ class StudentRegistrationForm(UserCreationForm):
     #         del self.cleaned_data['subjects']
     #     return cleaned_data
 
+class ClassRegistrationForm(forms.ModelForm):
+    """
+    Class registration form fields
+    """
+    class Meta:
+        model = StdClass
+        fields = '__all__'
+
+class SubjectRegistrationForm(forms.ModelForm):
+    """
+    Subject registration form fields
+    """
+    class Meta:
+        model = Subject
+        fields = '__all__'

@@ -42,6 +42,9 @@ class Subject(models.Model):
 # need to thing 
 
 class StdClass(models.Model):
+    """
+    all classes in the school
+    """
     CLASS_CHOICES = [
         ('JSS1', 'JSS1'),
         ('JSS2', 'JSS2'),
@@ -51,9 +54,6 @@ class StdClass(models.Model):
         ('SSS3', 'SSS3'),
     ]
 
-    """
-    all classes in the school
-    """
     name = models.CharField(max_length=40)
     subject = models.ManyToManyField(Subject,related_name="classes")
     class_teacher = models.ForeignKey(
@@ -84,7 +84,7 @@ class Student(models.Model):
     std_class = models.ForeignKey(StdClass, on_delete=models.CASCADE, default=None)
     email = models.EmailField(max_length=50, default="codetrybe@codetrybe.com")
     gender = models.CharField(max_length=10, default='NULL')
-    # USERNAME_FIELD = 'user'
+    USERNAME_FIELD = 'user'
 
 
     def __str__(self):

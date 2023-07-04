@@ -1,9 +1,9 @@
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from django.contrib.auth.admin import User
+from django.contrib.auth.models import User
 from .models import Admin, Teacher, Student, Subject
-from .forms import AdminRegistrationForm, TeacherRegistrationForm, StudentRegistrationForm
+from .forms import AdminRegistrationForm, TeacherRegistrationForm, StudentRegistrationForm, ClassRegistrationForm, SubjectRegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -108,10 +108,33 @@ def tchReg(request):
         form = TeacherRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            Admin.objects.create(user=user, phone_number=form.cleaned_data['phone_number'])
-            return redirect('panel-tchRegpage')  
+            Teacher.objects.create(user=user, phone_number=form.cleaned_data['phone_number'])
+            return render(request, 'panel/admin.html')  
     form = TeacherRegistrationForm()
-    return render(request, template_name="panel/tchReg.html")
+    return render(request, "panel/tchReg.html", {'form':form})
+
+
+@login_required
+def clsReg(request):
+    if request.method == 'POST':
+        form = ClassRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'panel/admin.html')
+    form = ClassRegistrationForm()
+    return render(request, "panel/clsReg.html", {'form':form})
+
+
+@login_required
+def subReg(request):
+    if request.method == 'POST':
+        form = SubjectRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'panel/admin.html')
+    form = SubjectRegistrationForm()
+    return render(request, "panel/clsReg.html", {'form':form})
+    
 
 
 def Logout_view(request):

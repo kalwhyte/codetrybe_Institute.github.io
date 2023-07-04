@@ -1,10 +1,11 @@
 {% load static %}
+
 <!DOCTYPE>
 <html>
 <head>
     <title>Admin Login</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
     <form action="" method="post">
@@ -14,7 +15,7 @@
                     {% csrf_token %}
                     {{ form }}
                     
-                <input type="submit" class="btn btn-primary btn-md" value="Register" name="login" />
+                    <input type="submit" class="btn btn-primary btn-md" value="Register" name="login" />
                         </span>
                     </div>
                 </div>

@@ -10,5 +10,7 @@ urlpatterns = [
     path('StdReg/',views.StdReg, name='panel-StdRegpage'),
     path('admReg/',views.admReg, name='panel-admRegpage'),
     path('tchReg/',views.tchReg, name='panel-tchRegpage'),
+    path('clsReg/',views.clsReg, name='panel-clsRegpage'),
+    path('subReg/',views.subReg, name='panel-subRegpage'),
     path('logout/',views.Logout_view, name='panel-logout')
 ]

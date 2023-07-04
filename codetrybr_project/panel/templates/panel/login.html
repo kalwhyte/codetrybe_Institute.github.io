@@ -63,9 +63,23 @@
         <form action="#" class="signup">
             <div class="field">
                 <label for="user-type">User Type</label>
-                <a href="{% url 'panel-admRegpage'%}">Register Admin</a>
-                <a href="{% url 'panel-StdRegpage'%}">Register Student</a>
-                <a href="{% url 'panel-tchRegpage'%}">Register Teacher</a>
+                <ul>
+                    <li>
+                        <input type="radio" name="user-type" id="admin" checked>
+                        <label for="admin">Admin :</label>
+                        <a href="{% url 'panel-admRegpage'%}">Register Admin</a>
+                    </li>
+                    <li>
+                        <input type="radio" name="user-type" id="student">
+                        <label for="student">Student :</label>
+                        <a href="{% url 'panel-StdRegpage'%}">Register Student</a>
+                    </li>
+                    <li>
+                        <input type="radio" name="user-type" id="teacher">
+                        <label for="teacher">Teacher :</label>
+                        <a href="{% url 'panel-tchRegpage'%}">Register Teacher</a>
+                    </li>
+                </ul>            
             </div>
         </form>
       </div>
