@@ -57,52 +57,30 @@
                 <input type="submit" value="Login">
             </div>
             <div class="signup-link">
-                Not a member? <a href="{%url 'panel-registerpage'%}">Signup now</a>
+                Not a member? <a href="{%url 'panel-loginpage'%}">Signup now</a>
             </div>
         </form>
         <form action="#" class="signup">
             <div class="field">
                 <label for="user-type">User Type</label>
-                <select name="user-type" id="user-type">
-                    <option value="admin">Admin</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="student">Student</option>
-                </select>
-          </div>
-          {% if user_type == 'student' %}
-          <div class="field">
-            {{form.first_name}}
-          </div>
-          <div class="field">
-            {{form.last_name}}
-          </div>
-          <div class="field">
-            {{form.email}}
-          </div>
-          <div class="field">
-            {{form.phone_number}}
-          </div>
-          <div class="field">
-            {{form.class_name}}
-          <div class="field">
-            {{form.address}}
-          </div>
-          {% endif %}
-          {% if user_type in user_types %}
-              <div class="field">
-                {{form.username}}
-              </div>
-              <div class="field">
-                  {{form.password1}}
-              </div>
-              <div class="field">
-                  {{form.password2}}
-              </div>
-              <div class="field btn">
-                  <div class="btn-layer"></div>
-                  <input type="submit" value="Signup">
-              </div>
-          {% endif %}
+                <ul>
+                    <li>
+                        <input type="radio" name="user-type" id="admin" checked>
+                        <label for="admin">Admin :</label>
+                        <a href="{% url 'panel-admRegpage'%}">Register Admin</a>
+                    </li>
+                    <li>
+                        <input type="radio" name="user-type" id="student">
+                        <label for="student">Student :</label>
+                        <a href="{% url 'panel-StdRegpage'%}">Register Student</a>
+                    </li>
+                    <li>
+                        <input type="radio" name="user-type" id="teacher">
+                        <label for="teacher">Teacher :</label>
+                        <a href="{% url 'panel-tchRegpage'%}">Register Teacher</a>
+                    </li>
+                </ul>            
+            </div>
         </form>
       </div>
     </div>

@@ -27,19 +27,20 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    'localhost'
 ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'panel.apps.PanelConfig',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'panel.apps.PanelConfig', # pip install panel
+    'django.contrib.admin', # pip install django-admin
+    'django.contrib.auth', # pip install django-auth
+    'django.contrib.contenttypes', # pip install django-contenttypes
+    'django.contrib.sessions', # pip install django-sessions
+    'django.contrib.messages', # pip install django-messages
+    'django.contrib.staticfiles', # pip install django-staticfile
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = "/login/"

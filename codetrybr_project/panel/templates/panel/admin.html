@@ -1,10 +1,20 @@
-{% load static%}
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>CodeTrybe Admin Panel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-<h1>CodeTrybe Admin Panel</h1>
+    welcome {{user.username}}
+    {{admin_instance.phone_number}}
+    {{ admin_instance.address }}
+    <a href="{%url 'panel-admRegpage'%}"> register Admin</a>
+    <a href="{%url 'panel-StdRegpage'%}"> register Student</a>
+    <a href="{%url 'panel-tchRegpage'%}"> register teacher</a>
+    <a href="{%url 'panel-clsRegpage'%}"> register class</a>
+    <a href="{%url 'panel-subRegpage'%}"> register subject</a>
+    <a href="{% url 'panel-logout'%}"> Logout </a>    
+</div>
 </body>
 </html>
