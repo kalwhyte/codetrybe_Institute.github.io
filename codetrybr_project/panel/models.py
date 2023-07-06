@@ -86,7 +86,6 @@ class Student(models.Model):
     gender = models.CharField(max_length=10, default='NULL')
     USERNAME_FIELD = 'user'
 
-
     def __str__(self):
         return self.user.username
 

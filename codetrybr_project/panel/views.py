@@ -26,9 +26,18 @@ def login_view(request):
                 if user.check_password(password):
                     authenticated_user = authenticate(username=username, password=password)
                     login(request, authenticated_user)
-                      # Redirect to a success page.
-                   
-                    return render(request,'panel/admin.html')
+
+                    # if user is admin
+                    if user.is_superuser:
+                        return render(request,'panel/admin.html')
+                    # if user is teacher
+                    elif user.is_staff:
+                        return render(request,'panel/teach.html')
+                    # if user is student
+                    else:
+                        return render(request,'panel/student.html')
+
+
                 else:
                     # Return an 'invalid login' error message.
                     form.add_error('password', 'Invalid username or password')
@@ -136,6 +145,14 @@ def subReg(request):
     return render(request, "panel/clsReg.html", {'form':form})
     
 
+@login_required
+def teach(request):
+    return render(request, 'panel/teach.html')
+
+
+@login_required
+def student(request):
+    return render(request, 'panel/student.html')
 
 def Logout_view(request):
     logout(request)
