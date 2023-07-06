@@ -66,30 +66,39 @@ class StdClass(models.Model):
     def __str__(self):
         return self.name
     
-# OPTIONAL_SUBJECT = [
-#     ('Igbo', 'Igbo'),
-#     ('Yoruba', 'Yoruba'),
-#     ('Hausa', 'Hausa'),
-#     ('French', 'French'),
-#     ('Arabic', 'Arabic'),
-# ]
+
+# class Student(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     phone_number = models.CharField(max_length=20, default="0802")
+#     address = models.CharField(max_length=50, default="Default address")
+#     subjects = models.ManyToManyField(Subject, related_name="students", blank=True, limit_choices_to={'name__lte': 8})
+#     dob = models.DateField()
+#     std_class = models.ForeignKey(StdClass, on_delete=models.CASCADE, default=None)
+#     email = models.EmailField(max_length=50, default="codetrybe@codetrybe.com")
+#     gender = models.CharField(max_length=10, default='NULL')
+#     # USERNAME_FIELD = 'user'
+
+#     def __str__(self):
+#         return self.user.username
+
+
 
 class Student(models.Model):
+    """
+    a model for Teachers table
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    username = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=20, default="0802")
-    address = models.CharField(max_length=50, default="Default address")
-    subjects = models.ManyToManyField(Subject, related_name="students", blank=True, limit_choices_to={'name__lte': 8})
+    phone_number = models.CharField(max_length=20,default="+234-")
+    email = models.EmailField(max_length=50)
+    address = models.CharField(max_length=50,default="Default address")
+    subjects = models.ForeignKey(Subject,on_delete=models.SET_NULL,null=True,blank=True)
     dob = models.DateField()
     std_class = models.ForeignKey(StdClass, on_delete=models.CASCADE, default=None)
-    email = models.EmailField(max_length=50, default="codetrybe@codetrybe.com")
     gender = models.CharField(max_length=10, default='NULL')
-    USERNAME_FIELD = 'user'
 
 
     def __str__(self):
         return self.user.username
-
 
 class SubjectScore(models.Model):
     """
@@ -102,14 +111,3 @@ class SubjectScore(models.Model):
     def __str__(self):
         return f"{self.student.user.username} {self.subject.name}"
     
-# Create your models here.
-# class OptionalSubjectScore(models.Model):
-#     """
-#     a model for Subject Score
-#     """
-#     student = models.ForeignKey(Student,on_delete=models.CASCADE)
-#     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
-#     score = models.IntegerField()
-
-#     def __str__(self):
-#         return f"{self.student.user.username} {self.subject.name}"
