@@ -96,7 +96,6 @@ class Student(models.Model):
     std_class = models.ForeignKey(StdClass, on_delete=models.CASCADE, default=None)
     gender = models.CharField(max_length=10, default='NULL')
 
-
     def __str__(self):
         return self.user.username
 
