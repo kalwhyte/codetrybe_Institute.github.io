@@ -11,6 +11,10 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, template_name="panel/index.html")
 
+
+
+
+
 @login_required
 def welcome(request):
     return render(request, template_name="panel/index.html")
@@ -107,7 +111,7 @@ def StdReg(request):
                  raise e
                 # Redirect to the home page
             messages.success(request,"student successfully created")
-            return render(request, "panel/StdReg.html") 
+            return render(request, "panel/admin.html") 
     # If the request is a GET request, create an empty form instance and render it    
     form = StudentRegistrationForm()
     return render(request, "panel/StdReg.html", {'form': form, 'messages': messages.get_messages(request)})
@@ -178,6 +182,10 @@ def subReg(request):
 @login_required
 def teach(request):
     return render(request, 'panel/teach.html')
+
+
+def about_page(request):
+    return render(request, template_name="panel/about.html")
 
 
 @login_required

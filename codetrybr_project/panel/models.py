@@ -74,8 +74,12 @@ class StdClass(models.Model):
     )
     session = models.ForeignKey(Session, on_delete=models.CASCADE,default=None)
 
+    def get_students(self):
+        students = Student.objects.filter(std_class=self)
+        return students
+    
     def __str__(self):
-        return self.name
+        return self.name 
     
 
 

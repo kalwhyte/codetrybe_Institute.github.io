@@ -1,0 +1,29 @@
+FOR STUDENTS:
+
+1. View your table:
+grades, subjects, teachers, etc. 
+
+FOR TEACHERS:
+
+1. View your table:
+Students, subjects, grades, etc.
+
+FOR ADMINISTRATORS:
+
+1. View your table:
+Everything, superUser, etc.
+    = 
+
+
+## DESIGN.
+
+WEBPAGE:
+1. Apply now button
+2. courses
+3. contacts
+4. about us
+5. login
+6. register
+7. search
+8. footer
+9. browse more courses
