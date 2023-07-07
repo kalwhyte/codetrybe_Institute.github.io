@@ -1,9 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .models import Admin, Teacher, Student, Subject
-from .forms import AdminRegistrationForm, TeacherRegistrationForm, StudentRegistrationForm, ClassRegistrationForm, SubjectRegistrationForm
+from .forms import AdminRegistrationForm, TeacherRegistrationForm, StudentRegistrationForm, ClassRegistrationForm, SubjectRegistrationForm,SessionCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -28,15 +29,25 @@ def login_view(request):
                     login(request, authenticated_user)
 
                     # if user is admin
-                    if user.is_superuser:
-                        return render(request,'panel/admin.html')
-                    # if user is teacher
-                    elif user.is_staff:
-                        return render(request,'panel/teach.html')
-                    # if user is student
-                    else:
-                        return render(request,'panel/student.html')
+                    try:
+                        admin_instance = Admin.objects.get(user=user)
+                        return render(request, 'panel/admin.html', {"admin_instance": admin_instance})
+                    except Admin.DoesNotExist:
+                        pass
 
+                    try:
+                        teacher_instance = Teacher.objects.get(user=user)
+                        return render(request, 'panel/teach.html', {"teacher_instance": teacher_instance})
+                    except Teacher.DoesNotExist:
+                        pass
+
+                    try:
+                        student_instance = Student.objects.get(user=user)
+                        return render(request, 'panel/student.html', {"student_instance": student_instance})
+                    except Student.DoesNotExist:
+                        pass
+                    return render(request,"panel/admin.html")
+                    
 
                 else:
                     # Return an 'invalid login' error message.
@@ -59,41 +70,47 @@ def StdReg(request):
     if request.method == 'POST':
         form = StudentRegistrationForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            if User.objects.filter(username=username).exists():
-                form.add_error('username', 'Username already exists')
-                return render(request, "panel/StdReg.html", {'form':form})
             
-            # Save the user first
-            user = form.save()
-
-            # Retrieve the other fields
-            phone_number=form.cleaned_data['phone_number']
-            email=form.cleaned_data['email']
-            address=form.cleaned_data['address']
-            level=form.cleaned_data['level']
-            optional_subject=form.cleaned_data['optional_subject']
-            dob=form.cleaned_data['dob']
-            gender=form.cleaned_data['gender']
-
-            # Create a student object
-            student = Student.objects.create(
-                user=user,
-                phone_number=phone_number,
-                email=email,
-                address=address,
-                level=level,
-                optional_subject=optional_subject,
-                dob=dob,
-                gender=gender
-            )
-
-            # Redirect to the home page
-            return redirect('panel/admin.html')
-        
+            try:
+                password = form.cleaned_data['password']
+                confirm_password = form.cleaned_data['confirm_password']
+                if password!= confirm_password:
+                    messages.error(request,"unmatching password")
+                    return render(request, "panel/StdReg.html", {'form':form})
+                username = form.cleaned_data['username']
+                try:
+                    data = User.objects.get(username=username)
+                    messages.error(request, "Username already exists")
+                    return render(request, "panel/StdReg.html", {'form': form})
+                except User.DoesNotExist:
+                    pass
+                user = form.save(commit=False)
+                phone_number=form.cleaned_data['phone_number']
+                email=form.cleaned_data['email']
+                address=form.cleaned_data['address']
+                dob=form.cleaned_data['dob']
+                gender=form.cleaned_data['gender']
+                user.save()
+                student =  Student.objects.create(
+                    user=user,
+                    phone_number=phone_number,
+                    email=email,
+                    address=address,
+                    dob=dob,
+                    gender=gender
+                )
+            except ValueError:
+    # Silencing the ValueError
+                pass
+            except Exception as e:
+            # Handle other exceptions
+                 raise e
+                # Redirect to the home page
+            messages.success(request,"student successfully created")
+            return render(request, "panel/StdReg.html") 
     # If the request is a GET request, create an empty form instance and render it    
     form = StudentRegistrationForm()
-    return render(request, "panel/StdReg.html", {'form':form})
+    return render(request, "panel/StdReg.html", {'form': form, 'messages': messages.get_messages(request)})
     
 
 @login_required
@@ -101,11 +118,13 @@ def admReg(request):
     if request.method == 'POST':
         form = AdminRegistrationForm(request.POST)
         if form.is_valid():
+            form.instance.role = "admin"
             user = form.save()
             phone_number=form.cleaned_data['phone_number']
             email=form.cleaned_data['email']
+            address=form.cleaned_data['address']
 
-            Admin.objects.create(user=user, phone_number=phone_number)
+            Admin.objects.create(user=user, phone_number=phone_number,email=email,address=address)
             return redirect('panel-admRegpage')  
     form = AdminRegistrationForm()
     return render(request, "panel/admReg.html", {'form':form})
@@ -116,6 +135,7 @@ def tchReg(request):
     if request.method == 'POST':
         form = TeacherRegistrationForm(request.POST)
         if form.is_valid():
+            form.instance.role = "teacher"
             user = form.save()
             Teacher.objects.create(user=user, phone_number=form.cleaned_data['phone_number'])
             return render(request, 'panel/admin.html')  
@@ -135,6 +155,16 @@ def clsReg(request):
 
 
 @login_required
+def sessionReg(request):
+    if request.method == 'POST':
+        form = SessionCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'panel/admin.html')
+    form = SessionCreationForm()
+    return render(request, "panel/clsReg.html", {'form':form})
+
+@login_required
 def subReg(request):
     if request.method == 'POST':
         form = SubjectRegistrationForm(request.POST)
@@ -152,6 +182,8 @@ def teach(request):
 
 @login_required
 def student(request):
+    # user = User.objects.get(username)
+    # student_instance = Student.objects.get(user=user)
     return render(request, 'panel/student.html')
 
 def Logout_view(request):

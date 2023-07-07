@@ -14,5 +14,6 @@ urlpatterns = [
     path('subReg/',views.subReg, name='panel-subRegpage'),
     path('teach/',views.teach, name='panel-teachpage'),
     path('student/',views.student, name='panel-studentpage'),
+    path('session/',views.sessionReg, name='panel-session'),
     path('logout/',views.Logout_view, name='panel-logout')
 ]

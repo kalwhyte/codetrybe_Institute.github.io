@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    welcome {{user.username}}
-    {{admin_instance.phone_number}}
-    {{ admin_instance.address }}
-    <a href="{%url 'panel-logout'%}"> Logout </a>    
-</div>
-</body>
-</html>
+{% extends "panel/base.html" %}
+{% block content %}
+    welcome <P>{{teacher_instance.username}}</P>
+    <P>{{teacher_instance.phone_number}}</p>
+    <P>{{teacher_instance.email}}</p>
+    <P>{{teacher_instance.address}}</p>
+    <P>{{teacher_instance.gender}}</p>
+    <a href="{%url 'panel-logout'%}"> Logout </a>
+{% endblock %}

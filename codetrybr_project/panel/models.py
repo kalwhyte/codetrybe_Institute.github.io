@@ -5,11 +5,28 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+GENDER = [
+    ('male', 'Male'),
+    ('female', 'Female'),
+    ('other', 'Other'),
+]
+
+class Session(models.Model):
+    """
+    a model for sessions table
+    """
+    Year = models.CharField(max_length=50)
+    Term = models.CharField(max_length=50,default=None)
+
+    def __str__(self):
+        return self.Year
     
+
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20,default="0802")
     address = models.CharField(max_length=50,default="Default address")
+    role = models.CharField(max_length=20,default="admin") 
 
     def __str__(self):
         return self.user.username
@@ -23,6 +40,8 @@ class Teacher(models.Model):
     phone_number = models.CharField(max_length=20,default="+234-")
     email = models.EmailField(max_length=50)
     address = models.CharField(max_length=50,default="Default address")
+    gender = models.CharField(max_length=40,default="male")
+    role = models.CharField(max_length=20,default="teacher") 
 
     def __str__(self):
         return self.user.username
@@ -45,15 +64,6 @@ class StdClass(models.Model):
     """
     all classes in the school
     """
-    CLASS_CHOICES = [
-        ('JSS1', 'JSS1'),
-        ('JSS2', 'JSS2'),
-        ('JSS3', 'JSS3'),
-        ('SSS1', 'SSS1'),
-        ('SSS2', 'SSS2'),
-        ('SSS3', 'SSS3'),
-    ]
-
     name = models.CharField(max_length=40)
     subject = models.ManyToManyField(Subject,related_name="classes")
     class_teacher = models.ForeignKey(
@@ -62,25 +72,11 @@ class StdClass(models.Model):
         null=True,
         blank=True
     )
+    session = models.ForeignKey(Session, on_delete=models.CASCADE,default=None)
 
     def __str__(self):
         return self.name
     
-
-# class Student(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     phone_number = models.CharField(max_length=20, default="0802")
-#     address = models.CharField(max_length=50, default="Default address")
-#     subjects = models.ManyToManyField(Subject, related_name="students", blank=True, limit_choices_to={'name__lte': 8})
-#     dob = models.DateField()
-#     std_class = models.ForeignKey(StdClass, on_delete=models.CASCADE, default=None)
-#     email = models.EmailField(max_length=50, default="codetrybe@codetrybe.com")
-#     gender = models.CharField(max_length=10, default='NULL')
-#     # USERNAME_FIELD = 'user'
-
-#     def __str__(self):
-#         return self.user.username
-
 
 
 class Student(models.Model):
@@ -95,6 +91,7 @@ class Student(models.Model):
     dob = models.DateField()
     std_class = models.ForeignKey(StdClass, on_delete=models.CASCADE, default=None)
     gender = models.CharField(max_length=10, default='NULL')
+    role = models.CharField(max_length=20,default="student") 
 
     def __str__(self):
         return self.user.username

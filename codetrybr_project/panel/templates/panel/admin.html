@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "panel/base.html" %}
+{% block content %}
+
     welcome {{user.username}}
     {{admin_instance.phone_number}}
     {{ admin_instance.address }}
@@ -14,7 +9,10 @@
     <a href="{%url 'panel-tchRegpage'%}"> Teacher</a>
     <a href="{%url 'panel-clsRegpage'%}"> Class</a>
     <a href="{%url 'panel-subRegpage'%}"> Subject</a>
-    <a href="{% url 'panel-logout'%}"> Logout </a>    
+    <a href="{% url 'panel-logout'%}"> Logout </a> 
+    <a href="{%url 'panel-session'%}"> Session</a>
+
+        {% endblock %}
 </div>
 </body>
 </html>
