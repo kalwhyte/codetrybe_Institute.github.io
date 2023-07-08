@@ -31,23 +31,23 @@ def login_view(request):
 
                     # if user is admin
                     try:
-                        admin_instance = Admin.objects.get(user=user)
-                        return render(request, 'panel/admin.html', {"admin_instance": admin_instance})
+                        Admin.objects.get(user=user)
+                        return redirect("panel-adminpage")
+                        # return render(request, 'panel/admin.html', {"admin_instance": admin_instance})
                     except Admin.DoesNotExist:
                         pass
 
                     try:
-                        teacher_instance = Teacher.objects.get(user=user)
-                        return render(request, 'panel/teach.html', {"teacher_instance": teacher_instance})
+                        Teacher.objects.get(user=user)
+                        return redirect("panel-teachpage")
                     except Teacher.DoesNotExist:
                         pass
 
                     try:
-                        student_instance = Student.objects.get(user=user)
-                        return render(request, 'panel/student.html', {"student_instance": student_instance})
+                        Student.objects.get(user=user)
+                        return redirect("panel-studentpage")
                     except Student.DoesNotExist:
                         pass
-                    return render(request,"panel/admin.html")
                     
 
                 else:
@@ -62,8 +62,28 @@ def login_view(request):
 
 
 @login_required
+def student(request):
+    user = request.user
+    student_instance = Student.objects.get(user=user)
+    return render(request, 'panel/student.html',{'student_instance':student_instance})
+
+@login_required
 def admin(request):
-    return render(request, 'panel/admin.html')
+    user = request.user
+    print("success")
+    admin_instance = Admin.objects.get(user=user)
+    return render(request, 'panel/admin.html',{'admin_instance':admin_instance})
+
+
+
+@login_required
+def teacher(request):
+    user = request.user
+    teacher_instance = Teacher.objects.get(user=user)
+    return render(request, 'panel/teach.html',{'teacher_instance':teacher_instance})
+
+
+
 
 
 @login_required
@@ -176,20 +196,14 @@ def subReg(request):
     return render(request, "panel/clsReg.html", {'form':form})
     
 
-@login_required
-def teach(request):
-    return render(request, 'panel/teach.html')
+
 
 
 def about_page(request):
     return render(request, template_name="panel/about.html")
 
 
-@login_required
-def student(request):
-    # user = User.objects.get(username)
-    # student_instance = Student.objects.get(user=user)
-    return render(request, 'panel/student.html')
+
 
 
 def Logout_view(request):
