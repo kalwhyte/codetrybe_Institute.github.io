@@ -4,15 +4,15 @@
     welcome {{user.username}}
     {{admin_instance.phone_number}}
     {{ admin_instance.address }}
-    <a href="{%url 'panel-admRegpage'%}"> Admin</a>
-    <a href="{%url 'panel-StdRegpage'%}"> Student</a>
-    <a href="{%url 'panel-tchRegpage'%}"> Teacher</a>
-    <a href="{%url 'panel-clsRegpage'%}"> Class</a>
-    <a href="{%url 'panel-subRegpage'%}"> Subject</a>
+
+
+    <a href="{%url 'panel-allstd'%}"> Student</a>
+    <a href="{%url 'panel-alladm'%}"> Admin</a>
+    <a href="{%url 'panel-allcls'%}"> Class</a>
+    <a href="{%url 'panel-alltch'%}"> Teacher</a>
     <a href="{% url 'panel-logout'%}"> Logout </a> 
     <a href="{%url 'panel-session'%}"> Session</a>
-
-        {% endblock %}
+    {% endblock %}
 </div>
 </body>
 </html>

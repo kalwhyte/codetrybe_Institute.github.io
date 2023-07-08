@@ -1,0 +1,7 @@
+{% extends "panel/base.html" %}
+{% block content %}
+{% for teacher in  teacher_list %}
+{{teacher}}
+{% endfor %}
+<a href="{%url 'panel-tchRegpage'%}"> Teacher</a>
+{% endblock %}

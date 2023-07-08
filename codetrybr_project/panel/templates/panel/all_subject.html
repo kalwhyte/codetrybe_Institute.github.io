@@ -1,0 +1,8 @@
+{% extends "panel/base.html" %}
+{% block content %}
+{% for subject in  subject_list %}
+
+{{subject}}
+{% endfor %}
+<a href="{%url 'panel-subRegpage'%}"> Subject</a>
+{% endblock %}

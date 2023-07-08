@@ -1,0 +1,8 @@
+{% extends "panel/base.html" %}
+{% block content %}
+{% for class in  class_list %}
+
+{{class}}
+{% endfor %}
+<a href="{%url 'panel-clsRegpage'%}"> Class</a>
+{% endblock %}

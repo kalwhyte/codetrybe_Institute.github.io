@@ -1,0 +1,8 @@
+{% extends "panel/base.html" %}
+{% block content %}
+{% for admin in  admin_list %}
+
+{{admin}}
+{% endfor %}
+<a href="{%url 'panel-admRegpage'%}"> Admin</a>
+{% endblock %}

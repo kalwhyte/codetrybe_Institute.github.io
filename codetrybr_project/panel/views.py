@@ -3,16 +3,13 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from .models import Admin, Teacher, Student, Subject
+from .models import Admin, Teacher, Student, Subject,StdClass
 from .forms import AdminRegistrationForm, TeacherRegistrationForm, StudentRegistrationForm, ClassRegistrationForm, SubjectRegistrationForm,SessionCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     return render(request, template_name="panel/index.html")
-
-
-
 
 
 @login_required
@@ -194,6 +191,35 @@ def student(request):
     # student_instance = Student.objects.get(user=user)
     return render(request, 'panel/student.html')
 
+
 def Logout_view(request):
     logout(request)
     return render(request, 'panel/index.html')
+
+
+@login_required
+def all_student(request):
+    student_list = Student.objects.all()
+    return render(request, 'panel/all_student.html', {'student_list': student_list})
+
+@login_required
+def all_teachers(request):
+    teacher_list = Teacher.objects.all()
+    return render(request, 'panel/all_teachers.html', {'teacher_list': teacher_list})
+
+
+@login_required
+def all_admin(request):
+    admin_list = Admin.objects.all()
+    return render(request,'panel/all_admin.html', {'admin_list': admin_list})
+
+
+@login_required
+def all_class(request):
+    class_list = StdClass.objects.all()
+    return render(request, 'panel/all_class.html', {'class_list': class_list})
+
+@login_required
+def all_subject(request):
+    subject_list = Subject.objects.all()
+    return render(request, 'panel/all_subject.html', {'subject_list': subject_list})

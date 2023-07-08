@@ -15,6 +15,11 @@ urlpatterns = [
     path('subReg/',views.subReg, name='panel-subRegpage'),
     path('teach/',views.teach, name='panel-teachpage'),
     path('student/',views.student, name='panel-studentpage'),
+    path('std_all',views.all_student,name='panel-allstd'),
+    path('adm_all',views.all_admin,name='panel-alladm'),
+    path('tch_all',views.all_teachers,name='panel-alltch'),
+    path('cls_all',views.all_class,name='panel-allcls'),
+    path('sub_all',views.all_subject,name='panel-allsub'),
     path('session/',views.sessionReg, name='panel-session'),
     path('logout/',views.Logout_view, name='panel-logout')
 ]

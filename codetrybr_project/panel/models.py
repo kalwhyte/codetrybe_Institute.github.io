@@ -53,12 +53,13 @@ class Subject(models.Model):
     """
     name = models.CharField(max_length=30)
     Teacher = models.ManyToManyField(Teacher,related_name="subject_taught")
-    score = models.IntegerField(null=True, blank=True)
-    # class_offering =models.ForeignKey()
+
     def __str__(self):
         return self.name
 
+
 # need to thing 
+
 
 class StdClass(models.Model):
     """
@@ -78,9 +79,9 @@ class StdClass(models.Model):
         students = Student.objects.filter(std_class=self)
         return students
     
-    def __str__(self):
-        return self.name 
     
+    def __str__(self):
+        return self.name     
 
 
 class Student(models.Model):

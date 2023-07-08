@@ -1,0 +1,7 @@
+{% extends "panel/base.html" %}
+{% block content %}
+{% for student in  student_list %}
+{{student}}
+{% endfor %}
+<a href="{%url 'panel-StdRegpage'%}"> Student</a>
+{% endblock %}
