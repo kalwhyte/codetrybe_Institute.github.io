@@ -217,3 +217,7 @@
    .warning {
        color: #2f6600;
    }
+   span.erro{
+    color: white;
+    font-size:11px ;
+   }
