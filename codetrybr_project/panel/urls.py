@@ -20,6 +20,7 @@ urlpatterns = [
     path('tch_all',views.all_teachers,name='panel-alltch'),
     path('cls_all',views.all_class,name='panel-allcls'),
     path('sub_all',views.all_subject,name='panel-allsub'),
+    path('std_up',views.std_update,name='panel-stdup'),
     path('session/',views.sessionReg, name='panel-session'),
     path('logout/',views.Logout_view, name='panel-logout')
 ]

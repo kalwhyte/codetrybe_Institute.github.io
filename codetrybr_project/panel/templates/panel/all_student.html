@@ -1,7 +1,14 @@
 {% extends "panel/base.html" %}
 {% block content %}
 {% for student in  student_list %}
-{{student}}
+<form action="{% url 'panel-stdup' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="username" value="{{student}}">
+
+<button type="submit">{{student}}</button>
+    
+</form>
+
 {% endfor %}
-<a href="{%url 'panel-StdRegpage'%}"> Student</a>
+<a href="{%url 'panel-StdRegpage'%}"> Add new student</a>
 {% endblock %}

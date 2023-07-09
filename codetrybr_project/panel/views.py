@@ -237,3 +237,54 @@ def all_class(request):
 def all_subject(request):
     subject_list = Subject.objects.all()
     return render(request, 'panel/all_subject.html', {'subject_list': subject_list})
+
+@login_required
+def std_update(request):
+    if request.method == 'POST':
+        user_instance = User.objects.get(username=request.POST['username'])
+        student_instance = Student.objects.get(user=user_instance)
+        print(student_instance)
+        form = StudentRegistrationForm(request.POST, instance=student_instance)
+        if form.is_valid():
+            try:
+                form.save()
+                
+                """
+                user = form.save(commit=False)
+                user.save()
+               
+                phone_number=form.cleaned_data['phone_number']
+                email=form.cleaned_data['email']
+                address=form.cleaned_data['address']
+                dob=form.cleaned_data['dob']
+                gender=form.cleaned_data['gender']
+
+                student_instance.phone_number=phone_number
+                student_instance.email=email 
+                student_instance.address=address
+                student_instance.dob=dob 
+                student_instance.gender=gender
+                student_instance.save()
+
+                # Update the username
+                user_instance.username = form.cleaned_data['username']
+                user_instance.save()
+                """
+                messages.success(request,"student successfully updated")
+                return render(request, "panel/admin.html")
+            except Exception as e:
+                messages.error(request,"student not updated" + str(e))
+        else:
+            #user_instance = User.objects.get(username=request.GET['username'])
+            student_instance = Student.objects.get(user=user_instance)
+            form = StudentRegistrationForm(instance=student_instance)
+            form1 = StudentRegistrationForm(instance=user_instance)
+
+            context = {
+                'form1': form1,
+                'form': form,
+                'messages': messages.get_messages(request),
+                'username': user_instance.username
+            }
+
+    return render(request, "panel/std_up.html", context)
