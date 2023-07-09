@@ -127,7 +127,7 @@ body a{
 .navbar .navbar-nav li .dropdown-menu li a i {
   margin: 0 10px 0 -5px;
   border: none;
-  color:rgb(6, 217, 149);
+  color:#081712;;
 }
 .navbar .navbar-nav li .dropdown-menu li.dropdown-menu-header .progress, .navbar .navbar-nav li .dropdown-menu li.dropdown-menu-footer .progress {
   border: 1px solid #e1e6ef;
@@ -223,7 +223,7 @@ body a{
   font-family: 'Roboto', sans-serif;
 }
 nav.top1.navbar.navbar-default.navbar-static-top {
-  background-color:rgb(6, 217, 149);
+  background-color:#081712;;
   font-family: 'Roboto', sans-serif;
 }
 .navbar-default .navbar-brand {
@@ -697,7 +697,7 @@ i.icon_13{
 #style-2::-webkit-scrollbar-thumb
 {
 	
-	background-color:rgb(6, 217, 149);
+	background-color:#081712;;
 }
 /*-- General stats --*/
 .stats-info{
@@ -894,8 +894,8 @@ canvas#doughnut, canvas#line, canvas#polarArea, #bar, #pie, #radar{
 }
 .btn-warning {
   color: #fff;
-  background-color:rgb(6, 217, 149);
-  border-color:rgb(6, 217, 149);
+  background-color:#081712;
+  border-color:#081712;
   padding:8.5px 12px;
 }
 .tag_01{
@@ -1017,7 +1017,7 @@ button.note-color-btn {
   background-color: #00bcd4;
 }
 .progress-bar-success {
-  background-color:rgb(6, 217, 149);
+  background-color:#081712;
 }
 .progress-bar-warning {
   background-color: #ffc107;
@@ -1032,14 +1032,14 @@ button.note-color-btn {
 	padding:0;
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-  background-color:rgb(6, 217, 149) !important;
-  border-color:rgb(6, 217, 149) !important;
+  background-color:#081712 !important;
+  border-color:#081712 !important;
 }
 .breadcrumb li{
 	font-size:0.85em;
 }
 .breadcrumb li a{
-	color:rgb(6, 217, 149);
+	color:#081712;
 }
 .badge-primary {
   background-color: #03a9f4;
@@ -1083,7 +1083,7 @@ button.note-color-btn {
 .btn-primary:hover{
   background-color: #fff !important;
   border-color: #fff !important;
-  color:rgb(6, 217, 149) !important;
+  color:#081712 !important;
 }
 h2.modal-title {
   font-size: 1.3em;
@@ -1467,7 +1467,7 @@ div.checker input {
   font-size: 14px;
 }
 .icon-state-warning {
-  color: rgb(6, 217, 149);
+  color: #081712;
 }
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
   font-size: 0.85em;
@@ -1489,8 +1489,8 @@ div.checker input {
 }
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
   color: #fff;
-  background-color:rgb(6, 217, 149);
-  border-color:rgb(6, 217, 149);
+  background-color:#081712;
+  border-color:#081712;
 }
 .btn-toolbar {
   margin-left: 0 !important;
@@ -1869,7 +1869,7 @@ label.round {
 	margin:1em 0 0 0;
 }
 .wid_blog{
-	background:rgb(6, 217, 149);
+	background:#081712;
 	padding:3em 2em;
 }
 .wid_blog h1{
@@ -1940,7 +1940,7 @@ label.round {
 	margin:1em 0 0 0;
 }
 .demolayout {
-  background:rgb(6, 217, 149);
+  background:#081712;
   width: 60px;
   overflow: hidden;
 }
@@ -2087,7 +2087,7 @@ body#login{
   padding: 10px 15px;
   width: 100%;
   border: none;
-  background: rgb(6, 217, 149);
+  background: #081712;
   border-radius: 2px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -2525,7 +2525,7 @@ ul.new {
   background-color: #fff;
 }
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-  border-color: rgb(6, 217, 149);
+  border-color: #081712;
 }
 form.navbar-form.navbar-right {
   margin: 0;
