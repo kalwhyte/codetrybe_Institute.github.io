@@ -121,7 +121,7 @@ def StdReg(request):
                     gender=gender
                 )
             except ValueError:
-    # Silencing the ValueError
+            # Silencing the ValueError
                 pass
             except Exception as e:
             # Handle other exceptions
@@ -243,7 +243,6 @@ def std_update(request):
     if request.method == 'POST':
         user_instance = User.objects.get(username=request.POST['username'])
         student_instance = Student.objects.get(user=user_instance)
-        print(student_instance)
         form = StudentRegistrationForm(request.POST, instance=student_instance)
         if form.is_valid():
             try:
