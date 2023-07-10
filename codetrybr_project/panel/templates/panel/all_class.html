@@ -1,8 +1,28 @@
 {% extends "panel/base.html" %}
 {% block content %}
-{% for class in  class_list %}
+    <div class="content_bottom">
+     <div class="col-md-8 span_3">
+		  <div class="bs-example1" data-example-id="contextual-table">
+		    <table class="table">
+		      <thead>
+                <tr>
+                    <th>Name</th>
+                    <th> <a href="{%url 'panel-clsRegpage'%}"> New Class</a></th>
+                </tr>
+		        <tr>
+		          <th>#</th>
+		          <th>Classes</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+                {% for class in  class_list %}
+		        <tr class="active">
+		          <th scope="row">..</th>
+		          <td>{{class}}</td>
+		        </tr>
+                {% endfor %}
+		      </tbody>
+		    </table>
 
-{{class}}
-{% endfor %}
-<a href="{%url 'panel-clsRegpage'%}"> Class</a>
+
 {% endblock %}

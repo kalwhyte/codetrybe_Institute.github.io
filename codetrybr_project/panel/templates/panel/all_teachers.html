@@ -1,7 +1,30 @@
 {% extends "panel/base.html" %}
 {% block content %}
-{% for teacher in  teacher_list %}
-{{teacher}}
-{% endfor %}
-<a href="{%url 'panel-tchRegpage'%}"> Teacher</a>
+<div class="content_bottom">
+<div class="col-md-8 span_3">
+<div class="bs-example1" data-example-id="contextual-table">
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th><a href="{%url 'panel-tchRegpage'%}"> Add new Teacher</a></th>
+    </tr>
+    <tr>
+            <th>#</th>
+            <th> All Teachers</th>
+    </tr>
+    </thead>
+    <tbody>
+        <form action="#" method="post">
+            {% csrf_token %}
+            {% for teacher in  teacher_list %}
+            <input type="hidden" name="username" value="{{student}}">
+            <tr class="active">
+                <td scope="row">..</td>
+                <td><button type="submit">{{teacher}}</button></td>
+            </tr>
+        </form>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

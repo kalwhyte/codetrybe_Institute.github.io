@@ -1,14 +1,30 @@
 {% extends "panel/base.html" %}
 {% block content %}
-{% for student in  student_list %}
-<form action="{% url 'panel-stdup' %}" method="post">
-    {% csrf_token %}
-    <input type="hidden" name="username" value="{{student}}">
-
-<button type="submit">{{student}}</button>
-    
-</form>
-
-{% endfor %}
-<a href="{%url 'panel-StdRegpage'%}"> Add new student</a>
+<div class="content_bottom">
+<div class="col-md-8 span_3">
+<div class="bs-example1" data-example-id="contextual-table">
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th> <a href="{%url 'panel-StdRegpage'%}"> Add new student</a></th>
+    </tr>
+    <tr>
+            <th>#</th>
+            <th> All Students</th>
+    </tr>
+    </thead>
+    <tbody>
+        <form action="{% url 'panel-stdup' %}" method="post">
+            {% csrf_token %}
+            {% for student in  student_list %}
+            <input type="hidden" name="username" value="{{student}}">
+            <tr class="active">
+                <td scope="row">..</td>
+                <td><button type="submit">{{student}}</button></td>
+            </tr>
+        </form>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

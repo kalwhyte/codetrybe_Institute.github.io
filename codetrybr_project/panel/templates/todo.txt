@@ -16,7 +16,8 @@ Everything, superUser, etc.
 to be able to edit the table
     = 
 
-
+FOR SUBJECTS 
+1. Add all subjects view
 ## DESIGN.
 
 WEBPAGE:
