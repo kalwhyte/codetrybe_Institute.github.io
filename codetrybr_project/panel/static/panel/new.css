@@ -19966,5 +19966,8 @@ h4.inner-text-title {
     }
 }
 
-
+.privacy-policy-container{
+    height: 500px;
+    overflow: auto;
+}
 /* //team block */

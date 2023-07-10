@@ -12,7 +12,7 @@ def home(request):
     return render(request, template_name="panel/index.html")
 
 
-@login_required
+#@login_required
 def welcome(request):
     return render(request, template_name="panel/index.html")
 
@@ -287,3 +287,11 @@ def std_update(request):
             }
 
     return render(request, "panel/std_up.html", context)
+
+
+def contact(request):
+    return render(request, template_name="panel/contact.html")
+
+
+def privacy(request):
+    return render(request, template_name="panel/privacy.html")

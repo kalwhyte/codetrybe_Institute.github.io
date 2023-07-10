@@ -6,11 +6,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CodeTrybe Institute</title>
+    <title>CODETRYBE INSTITUTE</title>
     <!-- Google fonts -->
     <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Template CSS Style link -->
-    <link rel="stylesheet" href="{% static 'assets/css/style-starter.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/new.css' %}">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
     <header id="site-header" class="fixed-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="{% url 'panel-index' %}"><i class="fas fa-graduation-cap"></i> CodeTrybe Institute
+                <a class="navbar-brand" href="{% url 'panel-welcome' %}"><i class="fas fa-graduation-cap"></i> CodeTrybe Institute
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false"
@@ -29,13 +29,13 @@
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{% url 'panel-index' %}">Home</a>
+                            <a class="nav-link" aria-current="page" href="{% url 'panel-welcome' %}">Home</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="courses.html">Courses</a>
-                        </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="#courses.html">Courses</a>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'panel-contact' %}">Contact</a>
                         </li>
                     </ul>
                     <!-- search-right -->
@@ -86,7 +86,7 @@
             <div class="container pt-4 pb-sm-4">
                 <h4 class="inner-text-title pt-5">About Us</h4>
                 <ul class="breadcrumbs-custom-path">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{% url 'panel-welcome' %}">Home</a></li>
                     <li class="active"><i class="fas fa-angle-right"></i>About Us</li>
                 </ul>
             </div>
@@ -100,12 +100,12 @@
             <div class="row pb-xl-5 align-items-center">
                 <div class="col-lg-6 position-relative home-block-3-left pb-lg-0 pb-5">
                     <div class="position-relative">
-                        <img src="assets/images/img1.jpg" alt="" class="img-fluid radius-image">
+                        <img src="{% static 'images/img1.jpg' %}" alt="" class="img-fluid radius-image">
                     </div>
                     <div class="imginfo__box">
                         <h6 class="imginfo__title">Get a Appointment Today!</h6>
                         <p>Nemo enim ipsam oluptatem quia oluptas<br> sit aspernatur aut odit aut fugit. </p>
-                        <a href="tel:http://1(800)7654321"><i class="fas fa-phone-alt"></i> 1-800-654-3210</a>
+                        <a href="#tel:http://234-813-250-0145"><i class="fas fa-phone-alt"></i> 234-813-250-0145</a>
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-6 offset-xl-1 mt-lg-0 mt-5 pt-lg-0 pt-5">
@@ -118,7 +118,7 @@
                         <li><i class="fas fa-check-circle"></i>Access more then 100K online courses</li>
                         <li><i class="fas fa-check-circle"></i>Traditional Academies</li>
                     </ul>
-                    <a href="contact.html" class="btn btn-style mt-5">Apply Now</a>
+                    <a href="{% url 'panel-contact' %}" class="btn btn-style mt-5">Apply Now</a>
                 </div>
             </div>
         </div>
@@ -135,28 +135,28 @@
             <div class="row text-center pt-4">
                 <div class="col-md-3 col-6">
                     <div class="counter">
-                        <img src="assets/images/icon-1.png" alt="" class="img-fluid">
+                        <img src="{% static 'images/icon-1.png' %}" alt="" class="img-fluid">
                         <div class="timer count-title count-number mt-sm-1" data-to="36076" data-speed="1500"></div>
                         <p class="count-text">Students Enrolled</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="counter">
-                        <img src="assets/images/icon-2.png" alt="" class="img-fluid">
+                        <img src="{% static 'images/icon-2.png' %}" alt="" class="img-fluid">
                         <div class="timer count-title count-number mt-3" data-to="786" data-speed="1500"></div>
                         <p class="count-text">Our Branches</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6 mt-md-0 mt-5">
                     <div class="counter">
-                        <img src="assets/images/icon-3.png" alt="" class="img-fluid">
+                        <img src="{% static 'images/icon-3.png' %}" alt="" class="img-fluid">
                         <div class="timer count-title count-number mt-3" data-to="3630" data-speed="1500"></div>
                         <p class="count-text">Total Courses</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6 mt-md-0 mt-5">
                     <div class="counter">
-                        <img src="assets/images/icon-4.png" alt="" class="img-fluid">
+                        <img src="{% static 'images/icon-4.png' %}" alt="" class="img-fluid">
                         <div class="timer count-title count-number mt-3" data-to="6300" data-speed="1500"></div>
                         <p class="count-text">Awards Won</p>
                     </div>
@@ -174,7 +174,7 @@
                     <div class="mask">
                         <ul>
                             <li class="anim1">
-                                <img src="assets/images/testi1.jpg" class="img-fluid rounded-circle"
+                                <img src="{% static 'images/testi1.jpg' %}" class="img-fluid rounded-circle"
                                     alt="client image" />
                                 <blockquote class="quote"><q>Duis aute irure dolor in reprehenderit in voluptate
                                         velit esse
@@ -186,7 +186,7 @@
                             </li>
 
                             <li class="anim2">
-                                <img src="assets/images/testi2.jpg" class="img-fluid rounded-circle"
+                                <img src="{% static 'images/testi2.jpg' %}" class="img-fluid rounded-circle"
                                     alt="client image" />
                                 <blockquote class="quote"><q>Sed ut perspiciatis unde omnis iste natus error sit
                                         voluptatem
@@ -197,7 +197,7 @@
                                 <div class="source">- Petey Cru</div>
                             </li>
                             <li class="anim3">
-                                <img src="assets/images/testi3.jpg" class="img-fluid rounded-circle "
+                                <img src="{% static 'images/testi3.jpg' %}" class="img-fluid rounded-circle "
                                     alt="client image" />
                                 <blockquote class="quote"><q>Lorem ipsum dolor sit amet, consectetur adipiscing
                                         elit, sed do
@@ -208,7 +208,7 @@
                                 <div class="source">- Anna Sth</div>
                             </li>
                             <li class="anim4">
-                                <img src="assets/images/testi1.jpg" class="img-fluid rounded-circle"
+                                <img src="{% static 'images/testi1.jpg' %}" class="img-fluid rounded-circle"
                                     alt="client image" />
                                 <blockquote class="quote"><q>Duis aute irure dolor in reprehenderit in voluptate
                                         velit esse
@@ -219,7 +219,7 @@
                                 <div class="source">- Gail For</div>
                             </li>
                             <li class="anim5">
-                                <img src="assets/images/testi2.jpg" class="img-fluid rounded-circle"
+                                <img src="{% static 'images/testi2.jpg' %}" class="img-fluid rounded-circle"
                                     alt="client image" />
                                 <blockquote class="quote"><q>Lorem ipsum dolor sit amet, consectetur adipiscing
                                         elit, sed do
@@ -248,7 +248,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="image-one">
                         <a href="#team">
-                            <img src="assets/images/team1.png" class="arrow-png img-responsive" />
+                            <img src="{% static 'images/team1.png' %}" class="arrow-png img-responsive" />
                             <h4>Emma Watson</h4>
                             <div class="buttons-teams2 mt-2">
                                 <a href="#team"><i class="fab fa-facebook-square"></i></a>
@@ -261,7 +261,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="image-one">
                         <a href="#team">
-                            <img src="assets/images/team2.png" class="arrow-png img-responsive">
+                            <img src="{% static 'images/team2.png' %}" class="arrow-png img-responsive">
                             <h4>Enrique Lal</h4>
                             <div class="buttons-teams2 mt-2">
                                 <a href="#team"><i class="fab fa-facebook-square"></i></a>
@@ -274,7 +274,7 @@
                 <div class="col-lg-3 col-6 mt-lg-0 mt-4">
                     <div class="image-one">
                         <a href="#team">
-                            <img src="assets/images/team3.png" class="arrow-png img-responsive">
+                            <img src="{% static 'images/team3.png' %}" class="arrow-png img-responsive">
                             <h4>Smith Ker</h4>
                             <div class="buttons-teams2 mt-2">
                                 <a href="#team"><i class="fab fa-facebook-square"></i></a>
@@ -287,7 +287,7 @@
                 <div class="col-lg-3 col-6 mt-lg-0 mt-4">
                     <div class="image-one">
                         <a href="#team">
-                            <img src="assets/images/team4.png" class="arrow-png img-responsive">
+                            <img src="{% static 'images/team4.png' %}" class="arrow-png img-responsive">
                             <h4>Forkler Lee</h4>
                             <div class="buttons-teams2 mt-2">
                                 <a href="#team"><i class="fab fa-facebook-square"></i></a>
@@ -307,7 +307,7 @@
         <div class="container pb-md-5 pb-4">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6 about-2-secs-right mb-lg-0 mb-4 text-center pe-lg-4">
-                    <img src="assets/images/image.jpg" alt="" class="img-fluid radius-image m-auto" />
+                    <img src="{% static 'images/image.jpg' %}" alt="" class="img-fluid radius-image m-auto" />
                 </div>
                 <div class="col-lg-6 about-2-secs-left ps-lg-5">
                     <p class="text-uppercase">Our Environment</p>
@@ -316,8 +316,8 @@
                         efficitur tortor.Uspendisse efficitur orci urna. In et augue ornare, tempor massa in, luctus
                         sapien. In et augue ornare, tempor massa.</p>
                     <div class="d-flex align-items-center mt-5">
-                        <a class="btn btn-style btn-style-3" href="contact.html">Contact Us</a>
-                        <a class="btn btn-style-primary ms-4" href="contact.html">Learn More <i
+                        <a class="btn btn-style btn-style-3" href="{% url 'panel-contact' %}">Contact Us</a>
+                        <a class="btn btn-style-primary ms-4" href="{% url 'panel-contact' %}">Learn More <i
                                 class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -337,9 +337,9 @@
                 <div class="right-content-call mt-lg-0 mt-4">
                     <ul class="buttons">
                         <li class="phone-sec me-lg-4"><i class="fas fa-phone-volume"></i>
-                            <a class="call-style-w3" href="tel:+1(23) 456 789 0000">+1(23) 456 789 0000</a>
+                            <a class="call-style-w3" href="tel:+234 813 250 0145">+234 813 250 0145</a>
                         </li>
-                        <li><a href="contact.html" class="btn btn-style btn-style-2 mt-lg-0 mt-3">Join for free</a>
+                        <li><a href="{% url 'panel-contact' %}" class="btn btn-style btn-style-2 mt-lg-0 mt-3">Join for free</a>
                         </li>
                     </ul>
                 </div>
@@ -355,17 +355,17 @@
                 <div class="row footer-top-29">
                     <div class="col-lg-4 col-md-6 footer-list-29">
                         <h6 class="footer-title-29">Contact Info </h6>
-                        <p class="mb-2 pe-xl-5">Address : Edu School, 10001, 5th Avenue, #06 lane street, NY - 62617.
+                        <p class="mb-2 pe-xl-5">Address : CodeTrybe Institute, 10001, 5th Avenue, #06 lane street, PH - 62617.
                         </p>
-                        <p class="mb-2">Phone Number : <a href="tel:+1(21) 234 4567">+1(21) 234 4567</a></p>
-                        <p class="mb-2">Email : <a href="mailto:info@example.com">info@example.com</a></p>
+                        <p class="mb-2">Phone Number : <a href="tel:+234 813 250 0145">+234 813 250 0145</a></p>
+                        <p class="mb-2">Email : <a href="mailto:info@codetrybe.com">info@example.com</a></p>
                     </div>
                     <div class="col-lg-2 col-md-3 col-6 footer-list-29 mt-md-0 mt-4">
                         <ul>
                             <h6 class="footer-title-29">Quick Links</h6>
                             <li><a href="{% url 'panel-about' %}">About Us</a></li>
                             <li><a href="courses.html">Courses</a></li>
-                            <li><a href="#become-teacher">Become a Teacher</a></li>
+                            <li><a href="{% url 'panel-contact'%}">Become a Teacher</a></li>
                             <li><a href="{% url 'panel-contact'%}">Contact Us</a></li>
                             <li><a href="#career">Career</a></li>
                         </ul>
@@ -374,7 +374,7 @@
                         <ul>
                             <h6 class="footer-title-29">Explore</h6>
                             <li><a href="#blog">Blog Posts</a></li>
-                            <li><a href="#privacy">Privacy policy</a></li>
+                            <li><a href="{% url 'panel-privacy' %}">Privacy policy</a></li>
                             <li><a href="{% url 'panel-contact'%}">Contact Us</a></li>
                             <li><a href="#license">License & uses</a></li>
                             <li><a href="#tutorials">Tutorials</a></li>

@@ -17,7 +17,7 @@
     <header id="site-header" class="fixed-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#index.html"><i class="fas fa-graduation-cap"></i>CODETRYBE INSTITUTE
+                <a class="navbar-brand" href="{% url 'panel-welcome'%}"><i class="fas fa-graduation-cap"></i>CODETRYBE INSTITUTE
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false"
@@ -31,10 +31,10 @@
                             <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="courses.html">Courses</a>
+                            <a class="nav-link" href="{% url 'panel-about' %}">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="{% url 'panel-contact' %}">Contact</a>
                         </li>
                     </ul>
                     <!-- search-right -->
@@ -515,10 +515,10 @@
                     <div class="col-lg-2 col-md-3 col-6 footer-list-29 mt-md-0 mt-4">
                         <ul>
                             <h6 class="footer-title-29">Quick Links</h6>
-                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="{% url 'panel-about' %}">About Us</a></li>
                             <li><a href="#courses.html">Courses</a></li>
-                            <li><a href="#become-teacher">Become a Teacher</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="{% url 'panel-contact'%}">Become a Teacher</a></li>
+                            <li><a href="{% url 'panel-contact' %}">Contact Us</a></li>
                             <li><a href="#career">Career</a></li>
                         </ul>
                     </div>
@@ -526,8 +526,8 @@
                         <ul>
                             <h6 class="footer-title-29">Explore</h6>
                             <li><a href="#blog">Blog Posts</a></li>
-                            <li><a href="#privacy">Privacy policy</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="{% url 'panel-privacy' %}">Privacy policy</a></li>
+                            <li><a href="{% url 'panel-contact' %}">Contact Us</a></li>
                             <li><a href="#license">License & uses</a></li>
                             <li><a href="#tutorials">Tutorials</a></li>
                         </ul>
