@@ -40,7 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Welcome {{user.username}}</a>
+                <a class="navbar-brand" href="#">Welcome {{user.username}}</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
@@ -134,79 +134,83 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="#index.html"><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
+                            <a href=""><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
                         </li>
+                       
                         <li>
-                            <a href="#"><i class="fa fa-laptop nav_icon"></i>Layouts<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-table nav_icon"></i>Students<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="grids.html">Grid System</a>
+                                    <a href="{%url 'panel-allstd'%}" >Students</a>
+                                </li>
+                                <li>
+                                    <a href="{%url 'panel-StdRegpage'%}"> Add new student</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-indent nav_icon"></i>Menu Levels<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-table nav_icon"></i>Classes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="graphs.html">Graphs</a>
+                                    <a href="{%url 'panel-allcls'%}" >Classes</a>
                                 </li>
                                 <li>
-                                    <a href="typography.html">Typography</a>
+                                    <a href="{%url 'panel-clsRegpage'%}"> Add new Class</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-envelope nav_icon"></i>Mailbox<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-table nav_icon"></i>Teacher<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="inbox.html">Inbox</a>
+                                    <a href="{%url 'panel-tchRegpage'%}"> Add new Teacher</a>
                                 </li>
                                 <li>
-                                    <a href="compose.html">Compose email</a>
+                                    <a href="{%url 'panel-alltch'%}" > Teachers</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="widgets.html"><i class="fa fa-flask nav_icon"></i>Widgets</a>
-                        </li>
-                         <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Forms<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-table nav_icon"></i>Admin<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="forms.html">Basic Forms</a>
+                                    <a href="{%url 'panel-admRegpage'%}"> New Admin</a>
                                 </li>
                                 <li>
-                                    <a href="validation.html">Validation</a>
+                                    <a href="{%url 'panel-alladm'%}" > Admin</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table nav_icon"></i>Tables<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-table nav_icon"></i>Subjects<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="basic_tables.html">Basic Tables</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Css<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="media.html">Media</a>
-                                </li>
-								<li class="m_2">
-									<a href="{% url 'panel-logout'%}" ><i class="fa fa-lock"></i> Logout</a>
+								<li>
+									<a href="{%url 'panel-subRegpage'%}"> Add new Subject</a>
 								</li>
+                                <li>
+                                    <a href="{%url 'panel-allsub'%}">All Subjects</a>
+								</li>
+							</ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table nav_icon"></i>Section<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+								<li>
+									<a href="{%url 'panel-session'%}" > Session</a>
+								</li>
+                                <li>
+                                    <a href="">All Subjects</a>
+                        		</li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                 </div>
+                <!-- /.sidebar-collapse -->
+            </div>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->

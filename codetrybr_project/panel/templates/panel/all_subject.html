@@ -1,8 +1,28 @@
 {% extends "panel/base.html" %}
 {% block content %}
-{% for subject in  subject_list %}
+    <div class="content_bottom">
+     <div class="col-md-8 span_3">
+		  <div class="bs-example1" data-example-id="contextual-table">
+		    <table class="table">
+		      <thead>
+                <tr>
+                    <th>Name</th>
+                    <th><a href="{%url 'panel-subRegpage'%}"> Add New Subject</a></th>
+                </tr>
+		        <tr>
+		          <th>#</th>
+		          <th>Subjects</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+                {% for subject in  subject_list %}
+		        <tr class="active">
+		          <th scope="row">..</th>
+		          <td>{{subject}}</td>
+		        </tr>
+                {% endfor %}
+		      </tbody>
+		    </table>
 
-{{subject}}
-{% endfor %}
-<a href="{%url 'panel-subRegpage'%}"> Subject</a>
+
 {% endblock %}

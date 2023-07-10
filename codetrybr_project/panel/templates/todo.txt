@@ -20,6 +20,7 @@ FOR SUBJECTS
 1. Add all subjects view
 ## DESIGN.
 
+* dashboard button not functional
 WEBPAGE:
 1. Apply now button
 2. courses
