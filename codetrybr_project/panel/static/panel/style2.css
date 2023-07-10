@@ -2894,3 +2894,7 @@ canvas#doughnut, canvas#line, canvas#polarArea, #bar, #pie, #radar {
   width: 245px !important;
 }
 }
+
+form.form-floating{
+  width: 50%;
+}
