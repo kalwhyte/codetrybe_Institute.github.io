@@ -32,7 +32,7 @@
                             <a class="nav-link" aria-current="page" href="{% url 'panel-welcome' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#courses.html">Courses</a>
+                            <a class="nav-link" href="{% url 'panel-about' %}">About</a>
                         </li> 
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'panel-contact' %}">Contact</a>
@@ -242,14 +242,14 @@
         <div class="container py-md-5 py-4">
             <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
                 <p class="text-uppercase">Our Team</p>
-                <h3 class="title-style">Meet our Teachers</h3>
+                <h3 class="title-style">Meet our Developers</h3>
             </div>
             <div class="row text-center left-side">
                 <div class="col-lg-3 col-6">
                     <div class="image-one">
                         <a href="#team">
                             <img src="{% static 'images/team1.png' %}" class="arrow-png img-responsive" />
-                            <h4>Emma Watson</h4>
+                            <h4>Emmanuel Whyte</h4>
                             <div class="buttons-teams2 mt-2">
                                 <a href="#team"><i class="fab fa-facebook-square"></i></a>
                                 <a href="#team"><i class="fab fa-twitter-square"></i></a>
@@ -262,7 +262,7 @@
                     <div class="image-one">
                         <a href="#team">
                             <img src="{% static 'images/team2.png' %}" class="arrow-png img-responsive">
-                            <h4>Enrique Lal</h4>
+                            <h4>Olaniyan Pelumi </h4>
                             <div class="buttons-teams2 mt-2">
                                 <a href="#team"><i class="fab fa-facebook-square"></i></a>
                                 <a href="#team"><i class="fab fa-twitter-square"></i></a>
@@ -426,15 +426,15 @@
     <!-- //move top -->
 
     <!-- common jquery plugin -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="{%static 'js/jquery-3.3.1.min.js' %}"></script>
     <!-- //common jquery plugin -->
 
     <!-- counter-->
-    <script src="assets/js/counter.js"></script>
+    <script src="{%static 'js/counter.js' %}"></script>
     <!-- //counter-->
 
     <!-- theme switch js (light and dark)-->
-    <script src="assets/js/theme-change.js"></script>
+    <script src="{%static 'js/theme-change.js' %}"></script>
     <!-- //theme switch js (light and dark)-->
 
     <!-- MENU-JS -->
@@ -477,7 +477,7 @@
     <!-- //disable body scroll which navbar is in active -->
 
     <!-- bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{%static 'js/bootstrap.min.js' %}"></script>
     <!-- //bootstrap -->
     <!-- //Js scripts -->
 </body>
