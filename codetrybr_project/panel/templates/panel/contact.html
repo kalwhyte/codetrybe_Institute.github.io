@@ -32,7 +32,7 @@
                             <a class="nav-link" aria-current="page" href="{% url 'panel-welcome'%}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#courses.html">Courses</a>
+                            <a class="nav-link" href="{% url 'panel-about' %}">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="{% url 'panel-contact' %}">Contact</a>
@@ -261,11 +261,11 @@
     <!-- //move top -->
 
     <!-- common jquery plugin -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="{%static 'js/jquery-3.3.1.min.js' %}"></script>
     <!-- //common jquery plugin -->
 
     <!-- theme switch js (light and dark)-->
-    <script src="assets/js/theme-change.js"></script>
+    <script src="{%static 'js/theme-change.js' %}"></script>
     <!-- //theme switch js (light and dark)-->
 
     <!-- MENU-JS -->
