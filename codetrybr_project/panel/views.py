@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .models import Admin, Teacher, Student, Subject,StdClass
@@ -196,14 +196,8 @@ def subReg(request):
     return render(request, "panel/clsReg.html", {'form':form})
     
 
-
-
-
 def about_page(request):
     return render(request, template_name="panel/about.html")
-
-
-
 
 
 def Logout_view(request):
@@ -233,14 +227,39 @@ def all_class(request):
     class_list = StdClass.objects.all()
     return render(request, 'panel/all_class.html', {'class_list': class_list})
 
+
 @login_required
 def all_subject(request):
     subject_list = Subject.objects.all()
     return render(request, 'panel/all_subject.html', {'subject_list': subject_list})
 
+
+@login_required
+def std_update(request):
+    username = request.GET.get('username')
+    student_instance = get_object_or_404(Student, user__username=username)
+
+    if request.method == 'POST':
+        form = StudentRegistrationForm(request.POST, instance=student_instance)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"student successfully updated")
+            return redirect('panel-adminpage')
+    else:
+        form = StudentRegistrationForm(instance=student_instance)
+
+    context = {
+        'form': form,
+        'username': student_instance.user.username
+    }
+    return render(request, "panel/std_up.html", context)
+
+
+"""
 @login_required
 def std_update(request):
     if request.method == 'POST':
+        username = request.POST.get('username')
         user_instance = User.objects.get(username=request.POST['username'])
         student_instance = Student.objects.get(user=user_instance)
         form = StudentRegistrationForm(request.POST, instance=student_instance)
@@ -248,7 +267,7 @@ def std_update(request):
             try:
                 form.save()
                 
-                """
+                
                 user = form.save(commit=False)
                 user.save()
                
@@ -268,7 +287,7 @@ def std_update(request):
                 # Update the username
                 user_instance.username = form.cleaned_data['username']
                 user_instance.save()
-                """
+                
                 messages.success(request,"student successfully updated")
                 return render(request, "panel/admin.html")
             except Exception as e:
@@ -287,7 +306,7 @@ def std_update(request):
             }
 
     return render(request, "panel/std_up.html", context)
-
+"""
 
 def contact(request):
     return render(request, template_name="panel/contact.html")

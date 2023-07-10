@@ -40,7 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="">Welcome {{user.username}}</a>
+                <a class="navbar-brand" href="index.html">Welcome {{user.username}}</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
@@ -188,19 +188,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#"><i class="fa fa-table nav_icon"></i>Subjects<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-								<li>
-									<a href="{%url 'panel-subRegpage'%}"> Add new Subject</a>
-								</li>
                                 <li>
-                                    <a href="">All Subjects</a>
-								</li>
-							</ul>
+                                    <a href="basic_tables.html">Basic Tables</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-table nav_icon"></i>Section<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
 								<li>
-									<a href="{%url 'panel-session'%}" > Session</a>
+									<a href="{%url 'panel-session'%}" > Section</a>
 								</li>
                                 <li>
                                     <a href="">All Subjects</a>
@@ -209,6 +207,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </li>
                     </ul>
                 </div>
+                <!-- /.sidebar-collapse -->
+            </div>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->

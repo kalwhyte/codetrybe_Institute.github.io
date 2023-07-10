@@ -40,7 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Welcome {{user.username}}</a>
+                <a class="navbar-brand" href="#">Welcome {{user.username}}</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
@@ -134,7 +134,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href=""><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
+                            <a href="{%url 'panel-adminpage' %}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
                         </li>
                        
                         <li>
@@ -203,7 +203,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<a href="{%url 'panel-session'%}" > Session</a>
 								</li>
                                 <li>
-                                    <a href="">All Subjects</a>
+                                    <a href="{% url 'panel-allsub'%}">All Subjects</a>
                         		</li>
                             </ul>
                         </li>
