@@ -1,16 +1,16 @@
 # codetrybe_Institute
 
-## Website Users story
+## Website Users' story
 As an admin of the Codetrybe web application, I want to have exclusive access to the signup page so that I can create user accounts for teachers, students, and other users.
 
-Acceptance Criteria:
+**Acceptance Criteria:**
 - Only the admin user should be able to access the signup page.
 - The signup page should allow the admin to create user accounts for teachers, students, and other users.
 - When creating user accounts, the admin should be able to enter relevant information such as username, password, phone number, address, email, and other specific details.
 - Upon successful creation of a user account, the user should be able to log in to the application using the provided credentials.
 - The signup page should provide appropriate feedback and error messages if there are any issues during the account creation process.
 
-User Flow:
+**User Flow:**
 1. The admin logs in to the Codetrybe web application using their credentials.
 2. After successful login, the admin navigates to the signup page.
 3. The system verifies that the logged-in user is an admin and grants access to the signup page.
