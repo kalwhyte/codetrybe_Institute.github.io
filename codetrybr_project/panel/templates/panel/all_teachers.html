@@ -15,14 +15,20 @@
     </tr>
     </thead>
     <tbody>
-        <form action="#" method="post">
+        {% for teacher in  teacher_list %}
+        <form action="{% url 'panel-uptch' teacher.id %}" method="get">
             {% csrf_token %}
-            {% for teacher in  teacher_list %}
-            <input type="hidden" name="username" value="{{student}}">
+            <input type="hidden" name="username" value="{{teacher}}">
             <tr class="active">
-                <td scope="row">..</td>
-                <td><button type="submit">{{teacher}}</button></td>
-            </tr>
+                <td scope="row">{{ forloop.counter}} </td>
+                <td scope="row"> {{teacher}} </td>
+                <td><button type="submit" class="btn btn-primary btn-md">update</button></td>
+        </form>
+        <form action="{% url 'panel-tchdel' teacher.id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="username" value="{{teacher}}">
+                <td><button type="submit" class="btn btn-danger btn-md">Delete</button></td>
+                </tr>
         </form>
         {% endfor %}
     </tbody>

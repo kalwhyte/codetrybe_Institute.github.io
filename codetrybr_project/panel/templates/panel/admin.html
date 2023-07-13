@@ -127,6 +127,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	        		</ul>
 	      		</li>
 			</ul>
+
 			<form class="navbar-form navbar-right">
               <input type="text" class="form-control" value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search...';}">
             </form>
@@ -192,18 +193,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<a href="{%url 'panel-subRegpage'%}"> Add new Subject</a>
 								</li>
                                 <li>
-                                    <a href="">All Subjects</a>
+                                    <a href="{%url 'panel-allsub'%}">All Subjects</a>
 								</li>
 							</ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table nav_icon"></i>Section<span class="fa arrow"></span></a>
+                              <a href="#"><i class="fa fa-table nav_icon"></i>Section<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
 								<li>
-									<a href="{%url 'panel-session'%}" > Session</a>
+									<a href="{%url 'panel-session'%}" > Section</a>
 								</li>
                                 <li>
-                                    <a href="{% url 'panel-allsub'%}">All Subjects</a>
+                                    <a href="{% url 'panel-allsec'%}">All Section</a>
                         		</li>
                             </ul>
                         </li>
@@ -214,6 +215,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
+			{% if messages %}
+{% for message in messages %}
+{% if message.tags %}
+<p class="alert alert-{{ message.tags }}">{{ message }}</p>
+{% endif %}
+{% endfor %}
+{% endif %}
         <div class="graphs">
      	<div class="col_3">
         	<div class="col-md-3 widget widget1">

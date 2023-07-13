@@ -31,7 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body id="login">
 <div id="wrapper">
-     <!-- Navigation -->
+      <!-- Navigation -->
         <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -40,7 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Welcome {{user.username}}</a>
+                <a class="navbar-brand" href="#">Welcome {{user.username}}</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
@@ -127,14 +127,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	        		</ul>
 	      		</li>
 			</ul>
+
 			<form class="navbar-form navbar-right">
               <input type="text" class="form-control" value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search...';}">
             </form>
             <div class="navbar-default sidebar" role="navigation">
-               <div class="sidebar-nav navbar-collapse">
+                <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href=""><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
+                            <a href="{%url 'panel-adminpage' %}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
                         </li>
                        
                         <li>
@@ -188,11 +189,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li>
                             <a href="#"><i class="fa fa-table nav_icon"></i>Subjects<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+								<li>
+									<a href="{%url 'panel-subRegpage'%}"> Add new Subject</a>
+								</li>
                                 <li>
-                                    <a href="basic_tables.html">Basic Tables</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                                    <a href="{%url 'panel-allsub'%}">All Subjects</a>
+								</li>
+							</ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-table nav_icon"></i>Section<span class="fa arrow"></span></a>
@@ -201,14 +204,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<a href="{%url 'panel-session'%}" > Section</a>
 								</li>
                                 <li>
-                                    <a href="">All Subjects</a>
+                                    <a href="{% url 'panel-allsec'%}">All Section</a>
                         		</li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <!-- /.sidebar-collapse -->
-            </div>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
@@ -218,10 +219,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             {% if messages %}
         {% for message in messages %}
             {% if message.tags %}
-                <p class="{{ message.tags }}">{{ message.tags }} - {{ message }}</p>
+            {%  if message.tags != 'error'%}
+                <p class="alert alert-{{ message.tags }}">{{ message.tags }} - {{ message|safe }}</p>
+            {% else %}
+            <p class="alert alert-danger">{{ message|safe }}</p>
+            {% endif %}
             {% endif %}
         {% endfor %}
     {% endif %}
+<!-- {% if form.errors %}
+{% for field in form %}
+    {% for error in field.errors %}
+        <span class="alert alert-danger">
+            {{error}}
+        </span>
+    {% endfor %}
+{% endfor %}
+{% endif %} -->
 
     {% block content %}
 

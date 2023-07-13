@@ -55,7 +55,7 @@ class StudentRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ['username', 'password', 'phone_number', 'email', 'address', 'dob', 'std_class', 'gender']
+        fields = ['username', 'password', 'phone_number', 'email', 'address', 'dob', 'std_class', 'gender',]
 
     def save(self, commit=True):
         user = User.objects.create_user(
@@ -68,8 +68,22 @@ class StudentRegistrationForm(forms.ModelForm):
         if commit:
             student.save()
         return student
+    
 
+class StudentUpdateForm(forms.ModelForm):
+    """
+    Student update form fields"""
+    class Meta:
+        model = Student
+        exclude = ['user','role']
+        
 
+class UserUpdateForm(forms.ModelForm):
+    """
+    updating the user instance"""
+    class Meta:
+        model = User
+        fields = ['username']
 
 class ClassRegistrationForm(forms.ModelForm):
     """

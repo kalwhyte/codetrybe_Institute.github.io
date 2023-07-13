@@ -554,6 +554,9 @@ a.tiles_info, a.shortcut-tiles {
 }
 .content_bottom{
 	margin-bottom:1em;
+  width: 100%;
+  margin-left: 300px;
+  margin-bottom: 1em;
 }
 .grid-date {
   background:#78cd51;
@@ -1651,6 +1654,7 @@ blockquote {
 	background:none;
 	padding:0;
 	margin:11em 0 0 0;
+  height: 100vh;
 }
 .register{
 	margin:2em 0 0 0;
@@ -2042,7 +2046,9 @@ body#login{
   -moz-background-size:cover;
   -o-background-size:cover;
   -ms-background-size:cover;
-  min-height:850px;
+  height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 .app-cam {
   width:22%;
@@ -2741,9 +2747,9 @@ span.btn_7{
 	font-size: 12px;
 	font-family: Arial, sans-serif;
 	opacity: 0;
-	background: rgba(0, 0, 0, 0.4);
+  background: #0e2936;
 	color: white;
-	border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid #0e2936;
 	margin-left: 1em;
 	margin-right: 1em;
 	margin-top: -1em;
@@ -2757,7 +2763,7 @@ span.btn_7{
 }
 .rickshaw_graph .detail .item.active {
 	opacity: 1;
-	background: rgba(0, 0, 0, 0.8);
+  background: #0e2936;
 }
 .rickshaw_graph .detail .item:after {
 	position: absolute;
@@ -2773,14 +2779,14 @@ span.btn_7{
 	top: 1em;
 	left: -5px;
 	margin-top: -5px;
-	border-right-color: rgba(0, 0, 0, 0.8);
+  border-right-color: #0e2936;
 	border-left-width: 0;
 }
 .rickshaw_graph .detail .item.right:after {
 	top: 1em;
 	right: -5px;
 	margin-top: -5px;
-	border-left-color: rgba(0, 0, 0, 0.8);
+  border-left-color: #0e2936;
 	border-right-width: 0;
 }
 .rickshaw_graph .detail .dot {

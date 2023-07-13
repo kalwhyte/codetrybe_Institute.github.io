@@ -18,7 +18,7 @@
                 {% for admin in  admin_list %}
 
 		        <tr class="active">
-		          <th scope="row">..</th>
+		          <th scope="row">{{ forloop.counter}} </th>
 		          <td>{{admin}}</td>
 		        </tr>
                 {% endfor %}

@@ -3,8 +3,10 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from .models import Admin, Teacher, Student, Subject,StdClass
-from .forms import AdminRegistrationForm, TeacherRegistrationForm, StudentRegistrationForm, ClassRegistrationForm, SubjectRegistrationForm,SessionCreationForm
+from .models import Admin, Teacher, Student, Subject,StdClass,Session
+from .forms import (AdminRegistrationForm, TeacherRegistrationForm, 
+StudentRegistrationForm, ClassRegistrationForm, SubjectRegistrationForm,SessionCreationForm,
+StudentUpdateForm, UserUpdateForm)
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -170,20 +172,22 @@ def clsReg(request):
         form = ClassRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request,'Class Successfully Created')
             return render(request, 'panel/admin.html')
     form = ClassRegistrationForm()
-    return render(request, "panel/clsReg.html", {'form':form})
+    return render(request, "panel/clsReg.html", {'form':form,'tag':'class'})
 
 
 @login_required
-def sessionReg(request):
+def sectionReg(request):
     if request.method == 'POST':
         form = SessionCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request,'Section Successfully Created')
             return render(request, 'panel/admin.html')
     form = SessionCreationForm()
-    return render(request, "panel/clsReg.html", {'form':form})
+    return render(request, "panel/clsReg.html", {'form':form,'tag':'Section'})
 
 @login_required
 def subReg(request):
@@ -191,9 +195,10 @@ def subReg(request):
         form = SubjectRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request,'Subject Successfully Created')
             return render(request, 'panel/admin.html')
     form = SubjectRegistrationForm()
-    return render(request, "panel/clsReg.html", {'form':form})
+    return render(request, "panel/clsReg.html", {'form':form,'tag':'Subject'})
     
 
 def about_page(request):
@@ -235,78 +240,240 @@ def all_subject(request):
 
 
 @login_required
-def std_update(request):
-    username = request.GET.get('username')
-    student_instance = get_object_or_404(Student, user__username=username)
+def all_section(request):
+    section_list = Session.objects.all()
+    print(section_list)
+    return render(request,'panel/all_section.html',{'section_list':section_list})
+
+# @login_required
+# def std_update(request,id):
+#     username = request.GET.get('username')
+#     student_instance = get_object_or_404(Student, user__username=username)
+
+#     if request.method == 'POST':
+#         form = StudentRegistrationForm(request.POST, instance=student_instance)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request,"student successfully updated")
+#             return redirect('panel-adminpage')
+#     else:
+#         form = StudentRegistrationForm(instance=student_instance)
+
+#     context = {
+#         'form': form,
+#         'username': student_instance.user.username
+#     }
+#     return render(request, "panel/std_up.html", context)
+
+
+
+# @login_required
+# def std_update(request,id):
+#     student_instance = get_object_or_404(Student,id=id) 
+#     user_instance = get_object_or_404(User,username=student_instance.user)
+#     form = StudentUpdateForm( instance=student_instance)
+#     username_form = UserUpdateForm(instance=user_instance)
+#     print(form)
+#     print(username_form)
+#     if request.method == 'POST':
+#         form = SubjectRegistrationForm(request.POST,instance=student_instance)
+#         username_form = UserUpdateForm(request.POST, instance=user_instance)
+#         print(form)
+#         print(username_form)
+#         if form.is_valid() and username_form.is_valid():
+#             print("form is valid")
+#             username_form.save()
+#             form.save()
+#             messages.success(request,"student successfully updated")
+#             return render(request, "panel/admin.html")
+#         else:
+#             print("form is not valid")
+#             messages.error(request,f"refused to create {form.errors}")
+#             form = StudentUpdateForm( instance=student_instance)
+#             username_form = UserUpdateForm(instance=user_instance)
+#             context = {
+#                 'form': form,
+#                 'username_form': username_form,
+#                 'messages': messages.get_messages(request),
+#             }
+
+#     return render(request, "panel/std_up.html",{'form':form,'username_form':username_form})
+
+@login_required
+def std_update(request, id):
+    student_instance = get_object_or_404(Student, id=id) 
+    user_instance = get_object_or_404(User, username=student_instance.user)
+    form = StudentUpdateForm(instance=student_instance)
+    username_form = UserUpdateForm(instance=user_instance)
 
     if request.method == 'POST':
-        form = StudentRegistrationForm(request.POST, instance=student_instance)
-        if form.is_valid():
+        form = StudentUpdateForm(request.POST, instance=student_instance)
+        username_form = UserUpdateForm(request.POST, instance=user_instance)
+
+        if form.is_valid() and username_form.is_valid():
+            username_form.save()
             form.save()
-            messages.success(request,"student successfully updated")
-            return redirect('panel-adminpage')
-    else:
-        form = StudentRegistrationForm(instance=student_instance)
+            messages.success(request, "Student successfully updated")
+            return render(request, "panel/admin.html")
+        else:
+            messages.error(request, f"Failed to update student {form.errors} ")
+
 
     context = {
         'form': form,
-        'username': student_instance.user.username
+        'username_form': username_form,
     }
+    form = StudentUpdateForm(instance=student_instance)
+    username_form = UserUpdateForm(instance=user_instance)
+
     return render(request, "panel/std_up.html", context)
 
 
-"""
 @login_required
-def std_update(request):
+def sub_update(request,id):
+    subject_instance = get_object_or_404(Subject, id=id) 
+    form = SubjectRegistrationForm(instance=subject_instance)
     if request.method == 'POST':
-        username = request.POST.get('username')
-        user_instance = User.objects.get(username=request.POST['username'])
-        student_instance = Student.objects.get(user=user_instance)
-        form = StudentRegistrationForm(request.POST, instance=student_instance)
+        form = SubjectRegistrationForm(request.POST,instance=subject_instance)
         if form.is_valid():
-            try:
-                form.save()
-                
-                
-                user = form.save(commit=False)
-                user.save()
-               
-                phone_number=form.cleaned_data['phone_number']
-                email=form.cleaned_data['email']
-                address=form.cleaned_data['address']
-                dob=form.cleaned_data['dob']
-                gender=form.cleaned_data['gender']
+           
+            form.save()
+            messages.success(request, "Subject successfully updated")
+            return redirect('panel-adminpage')
+    
+        return render(request, 'panel/all_up.html' ,{'form':form})
+    return render(request, 'panel/all_up.html' ,{'form':form})
 
-                student_instance.phone_number=phone_number
-                student_instance.email=email 
-                student_instance.address=address
-                student_instance.dob=dob 
-                student_instance.gender=gender
-                student_instance.save()
 
-                # Update the username
-                user_instance.username = form.cleaned_data['username']
-                user_instance.save()
-                
-                messages.success(request,"student successfully updated")
-                return render(request, "panel/admin.html")
-            except Exception as e:
-                messages.error(request,"student not updated" + str(e))
-        else:
-            #user_instance = User.objects.get(username=request.GET['username'])
-            student_instance = Student.objects.get(user=user_instance)
-            form = StudentRegistrationForm(instance=student_instance)
-            form1 = StudentRegistrationForm(instance=user_instance)
+@login_required
+def cls_update(request,id):
+    std_class_instance = get_object_or_404(StdClass, id=id) 
+    form = ClassRegistrationForm(instance=std_class_instance)
+    if request.method == 'POST':
+        form = ClassRegistrationForm(request.POST,instance=std_class_instance)
+        if form.is_valid():
+           
+            form.save()
+            messages.success(request, "Class successfully updated")
+            return redirect('panel-adminpage')
+    
+        return render(request, 'panel/all_up.html',{'form':form})
+    return render(request, 'panel/all_up.html',{'form':form})
 
-            context = {
-                'form1': form1,
-                'form': form,
-                'messages': messages.get_messages(request),
-                'username': user_instance.username
-            }
 
-    return render(request, "panel/std_up.html", context)
-"""
+@login_required
+def tch_update(request,id):
+    teacher_instance = get_object_or_404(Teacher, id=id)
+    print(teacher_instance.phone_number)
+    form = TeacherRegistrationForm(instance=teacher_instance)
+    print(form)
+    if request.method == 'POST':
+        form = TeacherRegistrationForm(request.POST,instance=teacher_instance)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Teacher successfully updated")
+            return redirect('panel-adminpage')
+    
+        return render(request, 'panel/user_up.html',{'form':form})
+    return render(request, 'panel/user_up.html',{'form':form})
+
+
+
+@login_required
+def sec_update(request,id):
+    section_instance = get_object_or_404(Session, id=id) 
+    form = SessionCreationForm(instance=section_instance)
+    if request.method == 'POST':
+        form = SessionCreationForm(request.POST,instance=section_instance)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Section successfully updated")
+            return redirect('panel-adminpage')
+    
+        return render(request, 'panel/all_up.html',{'form':form})
+    return render(request, 'panel/all_up.html',{'form':form})
+
+
+
+@login_required
+def std_delete(request,pk):
+    try:
+        student_instance = get_object_or_404(Student, id=pk) 
+        user_instance = get_object_or_404(User, username=student_instance.user.username)
+    except Student.DoesNotExist:
+        messages.error(request, "Student does not exist")
+        return redirect('panel-adminpage')
+    if request.method == 'POST':
+        user_instance.delete()
+        messages.success(request, "successfully deleted")
+        return redirect('panel-adminpage')
+
+
+@login_required
+def adm_delete(request,pk):
+    try:
+        admin_instance = get_object_or_404(Admin, id=pk) 
+        user_instance = get_object_or_404(User, username=admin_instance.user.username)
+    except Admin.DoesNotExist:
+        messages.error(request, "Admin does not exist")
+        return redirect('panel-adminpage')
+    if request.method == 'POST':
+        user_instance.delete()
+        messages.success(request, "successfully deleted")
+        return redirect('panel-adminpage')
+
+
+@login_required
+def tch_delete(request,pk):
+    try:
+        teacher_instance = get_object_or_404(Teacher, id=pk) 
+        user_instance = get_object_or_404(User, username=teacher_instance.user.username)
+    except Teacher.DoesNotExist:
+        messages.error(request, "Teacher does not exist")
+        return redirect('panel-adminpage')
+    if request.method == 'POST':
+        user_instance.delete()
+        messages.success(request, "successfully deleted")
+        return redirect('panel-adminpage')
+
+
+@login_required
+def cls_delete(request,pk):
+    try:
+        class_instance = get_object_or_404(StdClass, id=pk) 
+    except StdClass.DoesNotExist:
+        messages.error(request, "Class does not exist")
+        return redirect('panel-adminpage')
+    if request.method == 'POST':
+        class_instance.delete()
+        messages.success(request, "successfully deleted")
+        return redirect('panel-adminpage')
+    
+
+@login_required
+def sub_delete(request,pk):
+    try:
+        subject_instance = get_object_or_404(Subject, id=pk) 
+    except Subject.DoesNotExist:
+        messages.error(request, "Subject does not exist")
+        return redirect('panel-adminpage')
+    if request.method == 'POST':
+        subject_instance.delete()
+        messages.success(request, "successfully deleted")
+        return redirect('panel-adminpage')
+    
+
+@login_required
+def sec_delete(request,pk):
+    try:
+        section_instance = get_object_or_404(Session, id=pk) 
+    except Session.DoesNotExist:
+        messages.error(request, "Section does not exist")
+        return redirect('panel-adminpage')
+    if request.method == 'POST':
+        section_instance.delete()
+        messages.success(request, "successfully deleted")
+        return redirect('panel-adminpage')
 
 def contact(request):
     return render(request, template_name="panel/contact.html")
