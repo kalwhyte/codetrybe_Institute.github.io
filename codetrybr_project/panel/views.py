@@ -495,5 +495,8 @@ def view_teacher(request, id):
 
 def view_student(request, id):
     user = get_object_or_404(Student, id=id)
-    context = {'user': user}
+    stdClass = StdClass.objects.filter(name=user.std_class).first()
+    class_subjects = stdClass.subject.all()
+    class_session = stdClass.session
+    context = {'user': user, 'stdClass': stdClass, 'class_subjects': class_subjects, 'class_session': class_session}
     return render(request, 'panel/v_std.html', context)

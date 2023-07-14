@@ -1,19 +1,17 @@
 FOR STUDENTS:
-
-1. View your table:
-grades, subjects, teachers, etc. 
-to be able to edit hes or her table
+    1. View your table:
+    grades, subjects, teachers, etc. 
+    to be able to edit hes or her table
 
 FOR TEACHERS:
+    1. View your table: 
+    Students, subjects, grades, etc.
+    to be able to edit hes or her table
 
-1. View your table:
-Students, subjects, grades, etc.
-to be able to edit hes or her table
 FOR ADMINISTRATORS:
-
-1. View your table:
-Everything, superUser, etc.
-to be able to edit the table
+    1. View your table:
+    Everything, superUser, etc.
+    to be able to edit the table
     = 
 
 FOR SUBJECTS 
