@@ -21,7 +21,7 @@
             <input type="hidden" name="username" value="{{teacher}}">
             <tr class="active">
                 <td scope="row">{{ forloop.counter}} </td>
-                <td scope="row"> {{teacher}} </td>
+                <td scope="row"> <a href="{%url 'panel-view-teacher' teacher.id %}">{{teacher}}</a> </td>
                 <td><button type="submit" class="btn btn-primary btn-md">update</button></td>
         </form>
         <form action="{% url 'panel-tchdel' teacher.id %}" method="post">

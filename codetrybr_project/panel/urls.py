@@ -26,6 +26,7 @@ urlpatterns = [
     path('adm_del/<str:pk>/',views.adm_delete, name='panel-admdel'),
     path('tch_del/<str:pk>/',views.tch_delete, name='panel-tchdel'),
     path('update_teacher/<str:id>/',views.tch_update,name='panel-uptch'),
+    path('adm_up/<str:id>/',views.adm_update, name='panel-admup'),
     path('cls_del/<str:pk>/',views.cls_delete, name='panel-clsdel'),
     path('cls_up/<str:id>/',views.cls_update, name='panel-clsup'),
     path('sub_del/<str:pk>/',views.sub_delete, name='panel-subdel'),
@@ -35,5 +36,7 @@ urlpatterns = [
     path('sec_all',views.all_section,name='panel-allsec'),
     path('sec_del/<str:pk>/',views.sec_delete,name='panel-secdel'),
     path('sec_up/<str:id>/',views.sec_update,name='panel-secup'),
-    path('logout/',views.Logout_view, name='panel-logout')
+    path('logout/',views.Logout_view, name='panel-logout'),
+    path('view_teacher/<int:id>/',views.view_teacher, name='panel-view-teacher'),
+    path('view_student/<int:id>/',views.view_student, name='panel-view-student'),
 ]

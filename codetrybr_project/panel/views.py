@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from .models import Admin, Teacher, Student, Subject,StdClass,Session
 from .forms import (AdminRegistrationForm, TeacherRegistrationForm, 
 StudentRegistrationForm, ClassRegistrationForm, SubjectRegistrationForm,SessionCreationForm,
-StudentUpdateForm, UserUpdateForm)
+StudentUpdateForm, UserUpdateForm, TeacherUpdateForm, AdminUpdateForm)
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -144,11 +144,14 @@ def admReg(request):
             form.instance.role = "admin"
             user = form.save()
             phone_number=form.cleaned_data['phone_number']
-            email=form.cleaned_data['email']
+            #email=form.cleaned_data['email']
             address=form.cleaned_data['address']
 
-            Admin.objects.create(user=user, phone_number=phone_number,email=email,address=address)
-            return redirect('panel-admRegpage')  
+            Admin.objects.create(user=user, phone_number=phone_number, address=address)
+            messages.success(request,'Admin Successfully Created')
+            return redirect('panel-admRegpage')
+        else:
+            messages.error(request,f"refused to create {form.errors}")
     form = AdminRegistrationForm()
     return render(request, "panel/admReg.html", {'form':form})
 
@@ -161,7 +164,10 @@ def tchReg(request):
             form.instance.role = "teacher"
             user = form.save()
             Teacher.objects.create(user=user, phone_number=form.cleaned_data['phone_number'])
-            return render(request, 'panel/admin.html')  
+            return render(request, 'panel/admin.html')
+        else:
+            messages.error(request,f"refused to create {form.errors}")
+            
     form = TeacherRegistrationForm()
     return render(request, "panel/tchReg.html", {'form':form})
 
@@ -245,59 +251,6 @@ def all_section(request):
     print(section_list)
     return render(request,'panel/all_section.html',{'section_list':section_list})
 
-# @login_required
-# def std_update(request,id):
-#     username = request.GET.get('username')
-#     student_instance = get_object_or_404(Student, user__username=username)
-
-#     if request.method == 'POST':
-#         form = StudentRegistrationForm(request.POST, instance=student_instance)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request,"student successfully updated")
-#             return redirect('panel-adminpage')
-#     else:
-#         form = StudentRegistrationForm(instance=student_instance)
-
-#     context = {
-#         'form': form,
-#         'username': student_instance.user.username
-#     }
-#     return render(request, "panel/std_up.html", context)
-
-
-
-# @login_required
-# def std_update(request,id):
-#     student_instance = get_object_or_404(Student,id=id) 
-#     user_instance = get_object_or_404(User,username=student_instance.user)
-#     form = StudentUpdateForm( instance=student_instance)
-#     username_form = UserUpdateForm(instance=user_instance)
-#     print(form)
-#     print(username_form)
-#     if request.method == 'POST':
-#         form = SubjectRegistrationForm(request.POST,instance=student_instance)
-#         username_form = UserUpdateForm(request.POST, instance=user_instance)
-#         print(form)
-#         print(username_form)
-#         if form.is_valid() and username_form.is_valid():
-#             print("form is valid")
-#             username_form.save()
-#             form.save()
-#             messages.success(request,"student successfully updated")
-#             return render(request, "panel/admin.html")
-#         else:
-#             print("form is not valid")
-#             messages.error(request,f"refused to create {form.errors}")
-#             form = StudentUpdateForm( instance=student_instance)
-#             username_form = UserUpdateForm(instance=user_instance)
-#             context = {
-#                 'form': form,
-#                 'username_form': username_form,
-#                 'messages': messages.get_messages(request),
-#             }
-
-#     return render(request, "panel/std_up.html",{'form':form,'username_form':username_form})
 
 @login_required
 def std_update(request, id):
@@ -362,21 +315,64 @@ def cls_update(request,id):
 
 
 @login_required
-def tch_update(request,id):
+def tch_update(request, id):
     teacher_instance = get_object_or_404(Teacher, id=id)
-    print(teacher_instance.phone_number)
-    form = TeacherRegistrationForm(instance=teacher_instance)
+    user_instance = get_object_or_404(User, username=teacher_instance.user)
+    form = TeacherUpdateForm(instance=teacher_instance)
+    username_form = UserUpdateForm(instance=user_instance)
     print(form)
+    
     if request.method == 'POST':
-        form = TeacherRegistrationForm(request.POST,instance=teacher_instance)
-        if form.is_valid():
+        form = TeacherUpdateForm(request.POST,instance=teacher_instance)
+        username_form = UserUpdateForm(request.POST, instance=user_instance)
+
+        if form.is_valid() and username_form.is_valid():
+            username_form.save()
             form.save()
             messages.success(request, "Teacher successfully updated")
-            return redirect('panel-adminpage')
+            return render(request, 'panel/admin.html')
+        else:
+            messages.error(request, f"Failed to update teacher {form.errors} ")
     
-        return render(request, 'panel/user_up.html',{'form':form})
-    return render(request, 'panel/user_up.html',{'form':form})
 
+    context = {
+        'form': form,
+        'username_form': username_form,
+    }
+    form = TeacherUpdateForm(instance=teacher_instance)
+    username_form = UserUpdateForm(instance=user_instance)
+
+    return render(request, "panel/tch_up.html", context)
+
+
+@login_required
+def adm_update(request,id):
+    admin_instance = get_object_or_404(Admin, id=id)
+    user_instance = get_object_or_404(User, username=admin_instance.user)
+    form = AdminUpdateForm(instance=admin_instance)
+    username_form = UserUpdateForm(instance=user_instance)
+    print(form)
+    
+    if request.method == 'POST':
+        form = AdminUpdateForm(request.POST,instance=admin_instance)
+        username_form = UserUpdateForm(request.POST, instance=user_instance)
+
+        if form.is_valid() and username_form.is_valid():
+            username_form.save()
+            form.save()
+            messages.success(request, "Admin successfully updated")
+            return redirect('panel-adminpage')
+        else:
+            messages.error(request, f"Failed to update admin {form.errors} ")
+    
+    context = {
+        'form': form,
+        'username_form': username_form,
+    }
+    form = AdminUpdateForm(instance=admin_instance)
+    username_form = UserUpdateForm(instance=user_instance)
+
+    return render(request, "panel/adm_up.html", context)
 
 
 @login_required
@@ -438,6 +434,13 @@ def tch_delete(request,pk):
 
 
 @login_required
+def view_teacher(request, teacher_id):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    context = {'teacher': teacher}
+    return render(request, 'panel/view_teacher.html', context)
+
+
+@login_required
 def cls_delete(request,pk):
     try:
         class_instance = get_object_or_404(StdClass, id=pk) 
@@ -481,3 +484,16 @@ def contact(request):
 
 def privacy(request):
     return render(request, template_name="panel/privacy.html")
+
+
+def view_teacher(request, id):
+    user = get_object_or_404(Teacher, id=id)
+    subjects = Subject.objects.filter(Teacher=user)
+    context = {'user': user, 'subjects': subjects}
+    return render(request, 'panel/v_tch.html', context)
+
+
+def view_student(request, id):
+    user = get_object_or_404(Student, id=id)
+    context = {'user': user}
+    return render(request, 'panel/v_std.html', context)
