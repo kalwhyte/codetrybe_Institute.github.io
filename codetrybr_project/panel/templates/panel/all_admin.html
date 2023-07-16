@@ -16,11 +16,20 @@
 		      </thead>
 		      <tbody>
                 {% for admin in  admin_list %}
-
+				<form action="{% url 'panel-admup' admin.id %}" method="get">
+				{% csrf_token %}
+					<input type="hidden" name="username" value="{{admin}}">
 		        <tr class="active">
 		          <th scope="row">{{ forloop.counter}} </th>
-		          <td>{{admin}}</td>
-		        </tr>
+		          <td scope="row"> {{admin}} </td>
+		          <td><button type="submit" class="btn btn-primary btn-md">update</button></td>
+				</form>
+				<form action="{% url 'panel-admdel' admin.id %}" method="post">
+				{% csrf_token %}
+					<input type="hidden" name="username" value="{{admin}}">
+				<td><button type="submit" class="btn btn-danger btn-md">Delete</button></td>
+		       	</tr>
+				</form>
                 {% endfor %}
 		      </tbody>
 		    </table>

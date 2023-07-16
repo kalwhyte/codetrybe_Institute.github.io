@@ -22,7 +22,7 @@ class AdminRegistrationForm(UserCreationForm):
     admin registration form 
     """
     phone_number = forms.CharField(max_length=11)
-    email = forms.EmailField()
+    #email = forms.EmailField()
     address = forms.CharField(max_length=50)
 
 
@@ -30,7 +30,7 @@ class TeacherRegistrationForm(UserCreationForm):
     """
     Teacher registration form fields
     """
-    phone_number = forms.CharField(max_length=11)
+    phone_number = forms.CharField(max_length=20)
     email = forms.EmailField()
     address = forms.CharField(max_length=50)
     gender =forms.ChoiceField(choices=GENDER)
@@ -100,3 +100,20 @@ class SubjectRegistrationForm(forms.ModelForm):
     class Meta:
         model = Subject
         fields = '__all__'
+
+class TeacherUpdateForm(forms.ModelForm):
+    """
+    Teacher update form fields
+    """
+    class Meta:
+        model = Teacher
+        exclude = ['user','role']
+
+
+class AdminUpdateForm(forms.ModelForm):
+    """
+    Admin update form fields
+    """
+    class Meta:
+        model = Admin
+        exclude = ['user','role']
