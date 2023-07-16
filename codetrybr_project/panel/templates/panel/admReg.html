@@ -1,7 +1,7 @@
 {% extends "panel/base.html" %}
 {% block content %}
   <h2 class="form-heading">Register admin</h2>
-  <form class=" app-cam form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" " action="">
+  <form class=" app-cam form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" method="post" action="">
     
                     {% csrf_token %}
                     {{ form }}
