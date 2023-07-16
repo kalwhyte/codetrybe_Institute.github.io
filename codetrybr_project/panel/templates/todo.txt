@@ -1,21 +1,34 @@
 FOR STUDENTS:
     1. View your table:
-    grades, subjects, teachers, etc. 
-    to be able to edit hes or her table
+        grades, 
+        subjects, 
+        teachers,
+        class,
+        session,
+
 
 FOR TEACHERS:
     1. View your table: 
-    Students, subjects, grades, etc.
-    to be able to edit hes or her table
+        Students, 
+        subjects, 
+        grades, etc.
+        to be able to edit hes or her table
+    2. Add grades
+    
 
 FOR ADMINISTRATORS:
     1. View your table:
-    Everything, superUser, etc.
-    to be able to edit the table
+        Teachers,
+        Students,
+        sessions,
+        classes,
+        grades,
+        Everything, superUser, etc.
+        to be able to edit the table
     = 
 
 FOR SUBJECTS 
-1. Add all subjects view
+    1. Add all subjects view
 ## DESIGN.
 
 * dashboard button not functional
