@@ -15,12 +15,10 @@
                       
                             {% for student in  students %}
                                 <form action="" method="">
-                                    {% csrf_token %} 
-                                    <tr class="active">
-                                            <td> {{ forloop.counter}} </td>
-                                            <td scope="row"><a href="">{{student}}</a></td>
-                                            <td><button type="submit" class="btn btn-primary btn-md">Score</button></td>
-
+                                    {% csrf_token %} '
+                                    <input type="text" name="{{user}}" value="{{student}}">
+                                    <input type="text" name="subject" value="{{subject}}">
+                                    <input type="number" name="score" value="">
                                         </form>
                             {% endfor %}
 
