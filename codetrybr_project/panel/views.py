@@ -507,8 +507,12 @@ def view_student(request, id):
 #     print(mstd_class)
 #     students = Student.objects.filter(std_class = mstd_class)
 #     subject = Subject.objects.get(name=sub)
-#     form = SubjectScoreUpdateForm(queryset=SubjectScore.objects.filter(student__in=students))
-#     return render(request, 'panel/score.html',{"students":students,"subject":subject})
+#     form = SubjectScoreUpdateForm()
+#     if request.method == "POST":
+#         form = SubjectScoreUpdateForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#     return render(request, 'panel/score.html',{"students":students,"subject":subject,"form":form})
 
 def Score(request, cls, sub):
     mstd_class = StdClass.objects.filter(name=cls).first()
@@ -518,22 +522,23 @@ def Score(request, cls, sub):
     if request.method == "POST":
         form = SubjectScoreUpdateForm(request.POST)
         if form.is_valid():
-            # Handle form submission (e.g., saving the scores)
-            form.save()
+            for student in students:
+                score, created = SubjectScore.objects.get_or_create(student=student, subject=subject)
+                score.score = form.cleaned_data.get(f"student_{student.id}")  # Get the score for the current student
+                score.save()
+
             # Handle successful form submission (e.g., redirect)
             return redirect('success-url')
-    else:
-        initial_scores = {}
-        for student in students:
-            # Get the SubjectScore object for the student and subject if it exists
-            subject_score, created = SubjectScore.objects.get_or_create(student=student, subject=subject)
-            # Set the initial score for the form field (0 if new SubjectScore object)
-            initial_scores[student.id] = subject_score.score if not created else 0
 
-        form = SubjectScoreUpdateForm(initial=initial_scores)
+    # Get the existing scores for each student and populate the form
+    initial_scores = {}
+    for student in students:
+        score, created = SubjectScore.objects.get_or_create(student=student, subject=subject)
+        initial_scores[f"student_{student.id}"] = score.score
+
+    form = SubjectScoreUpdateForm(initial=initial_scores)
 
     return render(request, 'panel/score.html', {"students": students, "subject": subject, "form": form})
-
 
 
 
