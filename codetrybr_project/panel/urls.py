@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LogoutView
+# from django.conf import settings
+# from django.conf.urls.static import static
 
 urlpatterns = [
     path('',views.home, name='panel-home'),
@@ -39,4 +41,9 @@ urlpatterns = [
     path('logout/',views.Logout_view, name='panel-logout'),
     path('view_teacher/<int:id>/',views.view_teacher, name='panel-view-teacher'),
     path('view_student/<int:id>/',views.view_student, name='panel-view-student'),
+    path('cls_all/Score/', views.allScore,name='panel-allScore'),
+    path('cls_all/Score/<str:cls>/<str:sub>', views.Score,name='panel-Score')
 ]
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL,document_root= settings.MEDIA_ROOT)

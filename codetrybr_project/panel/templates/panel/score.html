@@ -1,0 +1,31 @@
+{% extends "panel/base.html" %}
+{% block content %}
+<table>
+
+<div class="content_bottom">
+    <div class="col-md-8 span_3">
+        <div class="bs-example1" data-example-id="contextual-table">
+            <table class="table">
+                <tbody>   
+                    <tr  class="active">
+                        <div scopr="row">
+                        {{subject}}
+                        </div>
+                    </tr>         
+                      
+                            {% for student in  students %}
+                                <form action="" method="post">
+                                    {% csrf_token %} '
+                                    <input type="text" name="{{user}}" value="{{student}}">
+                                    <input type="text" name="subject" value="{{subject}}">
+                                    <input type="number" name="score" value="">
+                                    <button class="btn btn-primary btn-md" type="submit"> Score </button>
+                                        </form>
+                            {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

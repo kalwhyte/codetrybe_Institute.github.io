@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Student, Teacher, Admin, Subject, StdClass,Session
+from .models import Student, Teacher, Admin, Subject, StdClass,Session,SubjectScore
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -117,3 +117,12 @@ class AdminUpdateForm(forms.ModelForm):
     class Meta:
         model = Admin
         exclude = ['user','role']
+
+
+class SubjectScoreUpdateForm(forms.ModelForm):
+    """
+    class to score students
+    """
+    class  Meta:
+        model = SubjectScore
+        fields = "__all__"
