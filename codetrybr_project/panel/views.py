@@ -10,6 +10,10 @@ SubjectScoreUpdateForm,
 StudentUpdateForm, UserUpdateForm, TeacherUpdateForm, AdminUpdateForm)
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.forms import modelformset_factory
+from django.db.models import Case, When, Value, IntegerField
+
+
 # Create your views here.
 def home(request):
     return render(request, template_name="panel/index.html")
@@ -513,7 +517,7 @@ def view_student(request, id):
 #         if form.is_valid():
 #             form.save()
 #     return render(request, 'panel/score.html',{"students":students,"subject":subject,"form":form})
-
+"""
 def Score(request, cls, sub):
     mstd_class = StdClass.objects.filter(name=cls).first()
     students = Student.objects.filter(std_class=mstd_class)
@@ -555,4 +559,57 @@ def allScore(request):
             return render(request, 'panel/std_cls.html', {"all_Std_class": all_Std_class,"Std_subs":Std_subs,"cls":cls})
         else:
             messages.error(request,"no class with the inputed name")
+    return render(request, 'panel/std_cls.html')
+"""
+
+def Score(request, cls, sub):
+    mstd_class = StdClass.objects.filter(name=cls).first()
+    students = Student.objects.filter(std_class=mstd_class)
+    subject = Subject.objects.get(name=sub)
+    subject_name = subject.name
+
+    if request.method == "POST":
+        formset = SubjectScoreUpdateForm(request.POST)
+        if formset.is_valid():
+            for student in students:
+                score, created = SubjectScore.objects.get_or_create(student=student, subject=subject)
+                score.score = formset.cleaned_data.get(f"student_{student.id}")
+                score.save()
+            # Handle successful form submission
+            messages.success(request, "Scores successfully updated")
+            return redirect('success-url')
+    else:
+        initial_scores = []
+        for student in students:
+            for student in students:
+                score = student.subjectscore_set.filter(subject=subject).first()
+                if score:
+                    initial_scores[f"student_{student.id}"] = score.score
+            form = SubjectScoreUpdateForm(initial=initial_scores)
+
+    return render(request, 'panel/score.html', {
+        "students": students,
+        "subject": subject,
+        "subject_name": subject.name,
+        "form": form,
+    })
+
+
+def allScore(request):
+    if request.method == "POST":
+        cls = request.POST.get("classname")
+        if not cls:
+            messages.error(request, "Please input a class name")
+            return render(request, 'panel/std_cls.html')
+        
+        cls_obj = StdClass.objects.filter(name=cls).first()
+        if not cls_obj:
+            messages.error(request, "No class with the inputed name")
+            return render(request, 'panel/std_cls.html')
+    
+        std_subs = cls_obj.subject.all()
+        all_std_class = Student.objects.filter(std_class=cls_obj)
+
+        return render(request, 'panel/std_cls.html', {"all_Std_class": all_std_class, "Std_subs": std_subs, "cls": cls})
+
     return render(request, 'panel/std_cls.html')

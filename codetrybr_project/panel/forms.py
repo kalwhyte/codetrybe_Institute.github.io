@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Student, Teacher, Admin, Subject, StdClass,Session,SubjectScore
 from django.contrib.auth.models import User
 from django.db import models
+from django.forms import BaseFormSet
 
 
 GENDER = [
@@ -119,10 +120,19 @@ class AdminUpdateForm(forms.ModelForm):
         exclude = ['user','role']
 
 
+class BaseSubjectScoreFormSet(BaseFormSet):
+    def clean(self):
+        for form in self.forms:
+            score = form.cleaned_data.get('score')
+            if score is not None and (score < 0 or score > 100):
+                raise forms.ValidationError('Score must be between 0 and 100')
+
+
 class SubjectScoreUpdateForm(forms.ModelForm):
     """
     class to score students
     """
     class  Meta:
         model = SubjectScore
-        fields = "__all__"
+        fields = ['score']
+        #fields = "__all__"
