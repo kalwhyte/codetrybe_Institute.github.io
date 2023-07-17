@@ -122,7 +122,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li class="m_2"><a href="#"><i class="fa fa-usd"></i> Payments <span class="label label-default">42</span></a></li>
 						<li class="m_2"><a href="#"><i class="fa fa-file"></i> Projects <span class="label label-primary">42</span></a></li>
 						<li class="divider"></li>
-						<li class="m_2"><a href="#"><i class="fa fa-shield"></i> Lock Profile</a></li>
+						<li class="m_2">
+							<i class="fa fa-shield"></i>
+								<form action="{% url 'panel-admup' admin_instance.id %}" method="get">
+									{% csrf_token %}
+									<input type="hidden" name="username" value="{{admin_instance}}">
+									<tr class="active">
+									<input type="submit">update Profile</a>
+								</form>
+							</li>
 						<li class="m_2"><a href="{% url 'panel-logout'%}" ><i class="fa fa-lock"></i> Logout</a></li>	
 	        		</ul>
 	      		</li>
@@ -208,6 +216,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         		</li>
                             </ul>
                         </li>
+						<li>
+							<a href="{%url 'panel-allScore'%}"> Mark Student</a>
+						</li>
+						
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -215,13 +227,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
-			{% if messages %}
-{% for message in messages %}
-{% if message.tags %}
-<p class="alert alert-{{ message.tags }}">{{ message }}</p>
-{% endif %}
-{% endfor %}
-{% endif %}
+	{% if messages %}
+		{% for message in messages %}
+			{% if message.tags %}
+				<p class="alert alert-{{ message.tags }}">{{ message }}</p>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
         <div class="graphs">
      	<div class="col_3">
         	<div class="col-md-3 widget widget1">

@@ -9,7 +9,8 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
  <!-- Bootstrap Core CSS -->
-<link href="{% static 'panel/bootstrap.min.css'%}" rel='stylesheet' type='text/css' />
+ <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+ <link href="{% static 'panel/bootstrap.min.css'%}" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
 <link href="{% static 'panel/style2.css'%}"rel='stylesheet' type='text/css' />
 <!-- Graph CSS -->
@@ -28,6 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- Graph JavaScript -->
 <script src="{% static 'js/d3.v3.js' %}"></script>
 <script src="{% static 'js/rickshaw.js' %}"></script>
+<script src="https://kit.fontawesome.com/260528db11.js" crossorigin="anonymous"></script>
 </head>
 <body id="login">
 <div id="wrapper">
@@ -208,6 +210,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         		</li>
                             </ul>
                         </li>
+                        						<li>
+							<a href="{%url 'panel-allScore'%}"> Mark Student</a>
+						</li>
+						
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -220,9 +226,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         {% for message in messages %}
             {% if message.tags %}
             {%  if message.tags != 'error'%}
-                <p class="alert alert-{{ message.tags }}">{{ message.tags }} - {{ message|safe }}</p>
+                <p class="alert alert-{{ message.tags }} d-flex justify-content-center align-items-center">{{ message.tags }} - {{ message|safe }}</p>
             {% else %}
-            <p class="alert alert-danger">{{ message|safe }}</p>
+            <p class="d-flex justify-content-center align-items-center alert alert-danger ">{{ message|safe }}</p>
             {% endif %}
             {% endif %}
         {% endfor %}

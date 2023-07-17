@@ -1,0 +1,32 @@
+{% extends "panel/base.html" %}
+{% block content %}
+<table>
+
+<div class="content_bottom">
+    <div class="col-md-8 span_3">
+        <div class="bs-example1" data-example-id="contextual-table">
+            <table class="table">
+                <tbody>   
+                    <tr  class="active">
+                        <div scopr="row">
+                        {{subject}}
+                        </div>
+                    </tr>         
+                      
+                            {% for student in  students %}
+                                <form action="" method="">
+                                    {% csrf_token %} 
+                                    <tr class="active">
+                                            <td> {{ forloop.counter}} </td>
+                                            <td scope="row"><a href="">{{student}}</a></td>
+                                            <td><button type="submit" class="btn btn-primary btn-md">Score</button></td>
+
+                                        </form>
+                            {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

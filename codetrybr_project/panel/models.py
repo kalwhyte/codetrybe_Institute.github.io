@@ -92,7 +92,6 @@ class Student(models.Model):
     phone_number = models.CharField(max_length=20,default="+234-")
     email = models.EmailField(max_length=50)
     address = models.CharField(max_length=50,default="Default address")
-    #subjects = models.ForeignKey(Subject,on_delete=models.SET_NULL,null=True,blank=True)
     dob = models.DateField(null=True,blank=True)
     std_class = models.ForeignKey(StdClass, on_delete=models.CASCADE, default=None)
     gender = models.CharField(max_length=10, default='NULL')
@@ -105,6 +104,7 @@ class Student(models.Model):
     def get_students(cls):
         students = cls.objects.all()
         return students
+
 
 class SubjectScore(models.Model):
     """

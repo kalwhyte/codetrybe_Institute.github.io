@@ -3,9 +3,10 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from .models import Admin, Teacher, Student, Subject,StdClass,Session
+from .models import Admin, Teacher, Student, Subject,StdClass,Session,SubjectScore
 from .forms import (AdminRegistrationForm, TeacherRegistrationForm, 
 StudentRegistrationForm, ClassRegistrationForm, SubjectRegistrationForm,SessionCreationForm,
+SubjectScoreUpdateForm,
 StudentUpdateForm, UserUpdateForm, TeacherUpdateForm, AdminUpdateForm)
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -72,7 +73,6 @@ def student(request):
 @login_required
 def admin(request):
     user = request.user
-    print("success")
     admin_instance = Admin.objects.get(user=user)
     return render(request, 'panel/admin.html',{'admin_instance':admin_instance})
 
@@ -248,7 +248,6 @@ def all_subject(request):
 @login_required
 def all_section(request):
     section_list = Session.objects.all()
-    print(section_list)
     return render(request,'panel/all_section.html',{'section_list':section_list})
 
 
@@ -320,7 +319,7 @@ def tch_update(request, id):
     user_instance = get_object_or_404(User, username=teacher_instance.user)
     form = TeacherUpdateForm(instance=teacher_instance)
     username_form = UserUpdateForm(instance=user_instance)
-    print(form)
+
     
     if request.method == 'POST':
         form = TeacherUpdateForm(request.POST,instance=teacher_instance)
@@ -351,7 +350,7 @@ def adm_update(request,id):
     user_instance = get_object_or_404(User, username=admin_instance.user)
     form = AdminUpdateForm(instance=admin_instance)
     username_form = UserUpdateForm(instance=user_instance)
-    print(form)
+
     
     if request.method == 'POST':
         form = AdminUpdateForm(request.POST,instance=admin_instance)
@@ -500,3 +499,28 @@ def view_student(request, id):
     class_session = stdClass.session
     context = {'user': user, 'stdClass': stdClass, 'class_subjects': class_subjects, 'class_session': class_session}
     return render(request, 'panel/v_std.html', context)
+
+
+def Score(request,cls,sub):
+    # if request.method == "POST":
+    mstd_class = StdClass.objects.filter(name=cls).first()
+    students = Student.objects.filter(std_class = mstd_class)
+    subject = Subject.objects.get(name=sub)
+    # form = SubjectScoreUpdateForm(queryset=SubjectScore.objects.filter(student__in=students))
+    return render(request, 'panel/score.html',{"students":students,"subject":subject})
+
+
+def allScore(request):
+    if request.method == "POST":
+        cls = request.POST.get("classname")
+        if cls =="":
+            messages.error(request,"please input a class name")
+            return render(request, 'panel/std_cls.html')
+        Cls = StdClass.objects.filter(name=cls).first()
+        all_Std_class =  Student.objects.filter(std_class=Cls)
+        if all_Std_class:
+            Std_subs = Cls.subject.all()
+            return render(request, 'panel/std_cls.html', {"all_Std_class": all_Std_class,"Std_subs":Std_subs})
+        else:
+            messages.error(request,"no class with the inputed name")
+    return render(request, 'panel/std_cls.html')
