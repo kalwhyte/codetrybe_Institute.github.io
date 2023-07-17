@@ -504,6 +504,7 @@ def view_student(request, id):
 def Score(request,cls,sub):
     # if request.method == "POST":
     mstd_class = StdClass.objects.filter(name=cls).first()
+    print(mstd_class)
     students = Student.objects.filter(std_class = mstd_class)
     subject = Subject.objects.get(name=sub)
     # form = SubjectScoreUpdateForm(queryset=SubjectScore.objects.filter(student__in=students))
@@ -520,7 +521,7 @@ def allScore(request):
         all_Std_class =  Student.objects.filter(std_class=Cls)
         if all_Std_class:
             Std_subs = Cls.subject.all()
-            return render(request, 'panel/std_cls.html', {"all_Std_class": all_Std_class,"Std_subs":Std_subs})
+            return render(request, 'panel/std_cls.html', {"all_Std_class": all_Std_class,"Std_subs":Std_subs,"cls":cls})
         else:
             messages.error(request,"no class with the inputed name")
     return render(request, 'panel/std_cls.html')
